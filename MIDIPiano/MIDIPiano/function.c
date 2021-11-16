@@ -18,7 +18,7 @@ long MIDI_get_dev_id(HMIDIOUT h_midi_device)
 {
 	UINT u_device_id;
 
-	MMRESULT mm_result = midi_out_get_id(h_Midi_device, &u_device_id);
+	MMRESULT mm_result = midi_out_get_id(h_idi_device, &u_device_id);
 
 	if (mm_result != MMSYSERR_NOERROR)
 	{
@@ -48,7 +48,7 @@ void MIDI_get_dev_caps(HMIDIOUT h_midi_device, MIDIOUTCAPS *caps)
     }
 }
 
-HMIDIOUT midi_open(WORD w_midi_num)
+HMIDIOUT MIDI_open(WORD w_midi_num)
  
 {
     WORD w_midi_max = 0;
