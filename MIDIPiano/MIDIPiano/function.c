@@ -18,7 +18,7 @@ long MIDI_get_dev_id(HMIDIOUT h_midi_device)
 {
 	UINT u_device_id;
 
-	MMRESULT mm_result = midi_out_get_id(h_idi_device, &u_device_id);
+	MMRESULT mm_result = midi_out_get_id(h_midi_device, &u_device_id);
 
 	if (mm_result != MMSYSERR_NOERROR)
 	{
