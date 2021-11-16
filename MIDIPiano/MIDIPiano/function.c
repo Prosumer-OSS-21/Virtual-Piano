@@ -29,7 +29,7 @@ long MIDI_get_dev_id(HMIDIOUT h_midi_device)
 	return (long)u_device_id;
 }
 
-void midi_get_dev_caps(HMIDIOUT h_midi_device, MIDIOUTCAPS *caps)
+void MIDI_get_dev_caps(HMIDIOUT h_midi_device, MIDIOUTCAPS *caps)
 {
  
     long l_device_id;
