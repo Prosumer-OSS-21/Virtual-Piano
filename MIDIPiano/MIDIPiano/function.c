@@ -1,8 +1,6 @@
 #include "header.h"
 
-void CALLBACK MIDI_out_proc(HMIDIOUT h_Midi_device, UINT u_msg,
-	DWORD instance, DWORD paraml,
-	DWORD param2)
+void CALLBACK midi_out_proc(HMIDIOUT h_midi_device, UINT u_msg, DWORD instance, DWORD paraml, DWORD param2)
 {
 }
 
@@ -16,11 +14,11 @@ void MIDI_output_error(MMRESULT mm_result)
 	MessageBox(0, sz_err_msg, "Midi Error!!!", MB_OK);
 }
 
-long midi_get_dev_id(HMIDIOUT h_MIDI_device)
+long MIDI_get_dev_id(HMIDIOUT h_midi_device)
 {
 	UINT u_device_id;
 
-	MMRESULT mm_result = midiOutGetID(h_MIDI_device, &u_device_id);
+	MMRESULT mm_result = midi_out_get_id(h_Midi_device, &u_device_id);
 
 	if (mm_result != MMSYSERR_NOERROR)
 	{
@@ -31,67 +29,57 @@ long midi_get_dev_id(HMIDIOUT h_MIDI_device)
 	return (long)u_device_id;
 }
 
-void midi_get_dev_caps(HMIDIOUT m_dev_out_handle, MIDIOUTCAPS *caps)
+void midi_get_dev_caps(HMIDIOUT h_midi_device, MIDIOUTCAPS *caps)
 {
  
     long l_device_id;
- 
-    MMRESULT result;
 
-    l_device_id=midi_get_dev_id(m_dev_out_handle);
+    MMRESULT mm_result;
+
+    l_device_id = MIDI_get_dev_id(h_midi_device);
  
     if (l_device_id < 0) return;
  
-    result = midi_out_get_dev_caps((UINT)l_device_id, caps, sizeof(MIDIOUTCAPS));
+    mm_result = midi_out_get_dev_caps((UINT)l_device_id, caps, sizeof(MIDIOUTCAPS));
 
-    if(result != MMSYSERR_NOERROR)
+    if(mm_result != MMSYSERR_NOERROR)
     {
-        midi_output_error(result);
- 
+        MIDI_output_error(mm_result);
     }
- 
 }
 
-HMIDIOUT midi_open(WORD w_devs_num)
+HMIDIOUT midi_open(WORD w_midi_num)
  
 {
-    WORD w_max_dev_num=0;
+    WORD w_midi_max = 0;
+    MMRESULT mm_result = 0;
+    HMIDIOUT h_midi_device = NULL;
 
-    MMRESULT ui_midi_open=0;
+    w_midi_max = midi_in_get_num_devs();
 
-    HMIDIOUT m_dev_handle=NULL;
+    if (w_midi_num >= w_midi_max) w_midi_num = 0;
 
-    w_max_dev_num=midi_in_get_num_devs();
+    mm_result = midi_out_open(&h_midi_device, w_midi_num, (DWORD)(midi_out_proc), (DWORD)NULL, CALLBACK_FUNCTION);
 
-    if (w_devs_num >= w_max_dev_num)
+    if (mm_result != MMSYSERR_NOERROR)
     {
-        w_devs_num=0;
-    }
-
-    ui_midi_open = midi_out_open(&m_dev_handle, w_devs_num, (DWORD)(midi_out_proc), (DWORD)NULL, CALLBACK_FUNCTION);
-
-    if (ui_midi_open!=MMSYSERR_NOERROR)
-    {
-        midi_output_error(ui_midi_open);
+        MIDI_output_error(mm_result);
         return NULL;
     }
 
-    return m_dev_handle;
+    return h_midi_device;
 }
 
-LRESULT midi_close(HMIDIOUT m_dev_out_handle)
+LRESULT MIDI_close(HMIDIOUT h_midi_device)
 {
-    MMRESULT result;
+    MMRESULT mm_result;
 
-    result = midi_out_close(m_dev_out_handle);
+    mm_result = midi_out_close(h_midi_device);
 
-    if(result!=MMSYSERR_NOERROR)
+    if(mm_result != MMSYSERR_NOERROR)
     {
-        midi_output_error(result);
+        MIDI_output_error(mm_result);
         return FALSE;
-    }
-    else {
-        m_dev_out_handle=NULL;
     }
     return TRUE;
 }
