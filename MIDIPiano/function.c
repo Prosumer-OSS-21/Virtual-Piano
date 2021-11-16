@@ -15,3 +15,18 @@ void MIDI_output_error(MMRESULT mm_result)
 
 	MessageBox(0, sz_err_msg, "Midi Error!!!", MB_OK);
 }
+
+long midi_get_dev_id(HMIDIOUT h_MIDI_device)
+{
+	UINT u_device_id;
+
+	MMRESULT mm_result = midiOutGetID(h_MIDI_device, &u_device_id);
+
+	if (mm_result != MMSYSERR_NOERROR)
+	{
+		MIDI_output_error(mm_result);
+		return -1;
+	}
+
+	return (long)u_device_id;
+}
