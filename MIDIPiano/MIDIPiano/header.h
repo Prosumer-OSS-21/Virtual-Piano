@@ -5,7 +5,7 @@
 
 #pragma comment(lib, "wimmm.lib")
 
-#pragma pack(push, 1) // µ•¿Ã≈Õ ¿¸º€ 1πŸ¿Ã∆Æ
+#pragma pack(push, 1) // ¬µ¬•√Ä√å√Ö√ç √Ä√º¬º√õ 1¬π√ô√Ä√å√Ü¬Æ
 
 typedef struct
 {
@@ -23,6 +23,9 @@ typedef union
 
 #pragma pack(pop)
 
-void CALLBACK MIDI_out_proc(HMIDIOUT, UINT,	DWORD, DWORD, DWORD);
-
+void CALLBACK midi_out_proc(HMIDIOUT, UINT, DWORD, DWORD, DWORD);
 void MIDI_output_error(MMRESULT);
+long MIDI_get_dev_id(HMIDIOUT);
+void MIDI_get_dev_caps(HMIDIOUT, MIDIOUTCAPS);
+HMIDIOUT MIDI_open(WORD);
+LRESULT MIDI_close(HMIDIOUT);
