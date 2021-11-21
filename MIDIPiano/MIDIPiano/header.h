@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <mmsystem.h>
 
-#pragma comment(lib, "wimmm.lib")
+#pragma comment(lib, "winmm.lib")
 
 #pragma pack(push, 1) // 데이터 전송 1바이트
 
@@ -23,6 +23,6 @@ typedef union
 
 #pragma pack(pop)
 
-void CALLBACK MIDI_out_proc(HMIDIOUT, UINT,	DWORD, DWORD, DWORD);
+void CALLBACK MIDI_out_proc(HMIDIOUT, UINT, DWORD, DWORD, DWORD);
 
 void MIDI_output_error(MMRESULT);
