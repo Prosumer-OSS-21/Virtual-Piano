@@ -1,0 +1,8 @@
+C:\Users\HuiBeom\Desktop\GUITEST\Debug\GUITEST.vcxproj.AssemblyReference.cache
+C:\Users\HuiBeom\Desktop\GUITEST\Debug\GUITEST.exe
+C:\Users\HuiBeom\Desktop\GUITEST\Debug\GUITEST.mainForm.resources
+C:\Users\HuiBeom\Desktop\GUITEST\Debug\GUITEST.vcxproj.GenerateResource.cache
+D:\Extra\대학교\2학기\오픈소스SW\GUITEST\Debug\GUITEST.vcxproj.AssemblyReference.cache
+D:\Extra\대학교\2학기\오픈소스SW\GUITEST\Debug\GUITEST.mainForm.resources
+D:\Extra\대학교\2학기\오픈소스SW\GUITEST\Debug\GUITEST.vcxproj.GenerateResource.cache
+D:\Extra\대학교\2학기\오픈소스SW\GUITEST\Debug\GUITEST.exe

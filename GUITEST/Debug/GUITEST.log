@@ -1,0 +1,5 @@
+﻿D:\Visual Studio\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: 중간 디렉터리(Debug\)에 다른 프로젝트(GUITEST2.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
+  mainForm.obj : MSIL 모듈이 발견되었습니다. MSIL에 증분 링크를 사용할 수 없습니다. 전체 링크를 수행하고 있습니다.
+GUITEST2.lib(function.obj) : warning LNK4075: '/EDITANDCONTINUE'이(가) '/INCREMENTAL:NO' 사양으로 인해 무시됩니다.
+.NETFramework,Version=v4.6.1.AssemblyAttributes.obj : warning LNK4204: 'D:\Extra\대학교\2학기\오픈소스SW\GUITEST\Debug\vc142.pdb'에 참조 모듈에 대한 디버깅 정보가 없습니다. 디버깅 정보가 없는 것처럼 개체를 링크합니다.
+  GUITEST.vcxproj -> D:\Extra\대학교\2학기\오픈소스SW\GUITEST\Debug\GUITEST.exe
