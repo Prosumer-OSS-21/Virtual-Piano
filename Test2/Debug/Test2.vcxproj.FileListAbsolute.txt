@@ -1,4 +1,0 @@
-D:\Extra\대학교\2학기\오픈소스SW\Test2\Debug\Test2.vcxproj.AssemblyReference.cache
-D:\Extra\대학교\2학기\오픈소스SW\Test2\Debug\Test2.exe
-D:\Extra\대학교\2학기\오픈소스SW\Test2\Debug\Test2.GUI.resources
-D:\Extra\대학교\2학기\오픈소스SW\Test2\Debug\Test2.vcxproj.GenerateResource.cache
