@@ -13,37 +13,6 @@ void midi_output_error(MMRESULT mm_result)
 	MessageBox(0, sz_err_msg, "Midi Error!!!", MB_OK);
 }
 
-long midi_get_dev_id(HMIDIOUT h_midi_device)
-{
-	UINT u_device_id;
-
-	MMRESULT mm_result = midiOutGetID(h_midi_device, &u_device_id);
-
-	if (mm_result != MMSYSERR_NOERROR)
-	{
-		midi_output_error(mm_result);
-		return -1;
-	}
-
-	return (long)u_device_id;
-}
-
-void midi_get_dev_caps(HMIDIOUT h_midi_device, MIDIOUTCAPS* caps)
-{
-	long l_device_id;
-
-	MMRESULT mm_result;
-
-	l_device_id = midi_get_dev_id(h_midi_device);
-
-	if (l_device_id < 0) return;
-
-	mm_result = midiOutGetDevCaps((UINT)l_device_id, caps, sizeof(MIDIOUTCAPS));
-
-	if (mm_result != MMSYSERR_NOERROR)
-		midi_output_error(mm_result);
-}
-
 HMIDIOUT midi_open(WORD w_midi_num)
 {
 	WORD w_midi_max = 0;
