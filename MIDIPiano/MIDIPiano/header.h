@@ -25,8 +25,6 @@ typedef union
 #pragma pack(pop)
 
 void midi_output_error(MMRESULT mm_result);
-long midi_get_dev_id(HMIDIOUT h_midi_device);
-void midi_get_dev_caps(HMIDIOUT h_midi_device, MIDIOUTCAPS* caps);
 HMIDIOUT midi_open(WORD w_midi_num);
 LRESULT midi_close(HMIDIOUT h_midi_device);
 void midi_send_short_msg(HMIDIOUT h_midi_device, BYTE byte_state, BYTE byte_note, BYTE byte_valo);
