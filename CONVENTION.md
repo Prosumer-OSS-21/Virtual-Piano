@@ -116,3 +116,57 @@ composition/#24
 ```
 hotfix/#1
 ```
+
+# Issue Naming Convention
+
+## Introduction
+프로젝트를 진행할 때 어떠한 새로운 수정사항이 생기면 issue를 만들고 시작한다. 따라서 issue는 해당 수정사항을 나타내는 지표가 된다. 해당 네이밍 컨벤션은 Udacity Commit Message Style에서 Issue convention에 맞게 형식을 구성하였다.
+
+## Name Structure
+이름의 구조는 commit message의 제목 부분과 유사하다. type이 [] 내에 위치해있고, 그 뒤로 subject를 작성한다.
+
+```
+[type] Subject
+```
+
+- type : 어떤 종류의 issue인지를 명시한다. commit message convention에서의 type 종류에서 issue 만의 특성을 고려하여 추가하거나 삭제하였다. 아래에 구체적인 type의 종류가 나와있으니 참고하여 작성한다. 이는 반드시 []내에 적도록 한다.
+- Subject : 해당 issue에서 수정할 사항을 간략하게 명시한다. 글자수는 50글자가 넘어가지 않도록 하며, 한글 또는 영어로 작성한다. 영어로 작성할 경우에는 명령문의 형태로 하며, 첫 글자는 대문자로 한다.
+
+__type__
+- feat : 새로운 기능을 추가할 경우, 웹페이지에 새로운 내용을 추가할 경우
+- composition : 웹페이지 화면의 구성을 변경할 경우 (레이아웃, 배경 색 등)
+- fix : 버그를 고치는 것이 목적인 경우
+- docs : 문서화 진행 중인 문서를 수정하거나 추가할 경우
+- offer : 프로젝트 관련하여 어떠한 사항을 제안하고 싶을 경우
+- refactor : 코드 포맷 변경, 세미 콜론 누락 등 자잘한 코드를 수정, 새로운 기능이나 버그 수정없이 현재 구현을 개선하고자 할 경우
+- test : 테스트 추가, 테스트 리팩토링(프로덕션 코드 변경 X)을 할 목적인 경우
+
+## Caution
+> issue name에는 수정사항을 간략하게 적지만, 실제 issue 내용을 적는 부분(본문)에서는 구체적으로 작성한다. 예컨대 다음과 같은 내용이 들어가야 한다.
+- 어떠한 이유로 해당 issue를 생성하였는지
+- 해당 issue에서는 어떤 내용을 수정할 것인지
+
+> issue naming 에서의 type은 단순히 issue를 생성할 때 코드에서 수정하고자 하는 부분의 목적을 명시하는 역할이다. 만약 feat type의 issue를 생성하였다면, 이 issue에 따르는 commit 가운데 feat type이 commit이 존재할 수 있다. 웹사이트에 새로운 내용을 추가하려고 feat type으로 issue를 생성한 뒤 코드를 수정하다가 오류가 발견되어 fix type의 commit을 해당 issue에 추가하여도 된다. issue의 type과 commit의 type은 아무런 상관이 없다. 이를 헷갈리지 말아야 한다.
+
+> commit과 달리 issue는 제안(offer)하는 경우가 있으므로, offer type을 추가하였고, 웹페이지에 내용을 추가하는 issue와 화면 구성을 변경하는 issue가 구분되어 있는 것을 고려하여, feat type 외에 composition type을 추가하였다.
+
+> issue의 특성상 commit에서의 style이나 refactor과 같은 type은 잘 사용될 일이 없을 수도 있다. 하지만 만약을 대비하여 모든 경우에 type 종류를 정해놓기 위해 두 가지를 합쳐 refactor type을 정해놓았다.
+
+## Example
+1. 웹페이지에서 Branches라는 부분에 내용을 추가하고자 하는 경우
+```
+[refactor] midi_open 함수 구조 변형 -> 제목
+
+목적 :
+midi_open함수에서 콜백 함수를 제거해도 동일 동작을 수행하도록 코드를 짠다.
+콜백 함수는 아직 배우지 않은 함수이고 우리 수준에서 수정이 가능하도록 만들 필요가 있으므로 제거한다.
+```
+
+2. 여러가지 프로젝트의 convention을 문서로 정리하는 경우
+```
+[docs] convention 문서화 -> 제목
+
+목적 :
+프로젝트를 진행하며 생기는 convention을 하나의 문서로 정리한다.
+commit message convention에 대해서 우선 .md 확장자 파일로 작성토록 한다. -> 본문
+```
