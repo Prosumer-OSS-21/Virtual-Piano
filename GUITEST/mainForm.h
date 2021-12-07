@@ -54,8 +54,6 @@ char inst_name[][NINSTRUMENT] = {
 	"Guitar Fret Noise", "Breath Noise", "Seashore", "Bird Tweet",
 	"Telephone Ring", "Helicopter", "Applause", "Gunshot"
 };
-wchar_t instname[128];
-LPWSTR instname2;
 
 namespace GUITEST {
 
@@ -65,6 +63,7 @@ namespace GUITEST {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace std;
 
 	/// <summary>
 	/// mainForm에 대한 요약입니다.
@@ -764,11 +763,12 @@ namespace GUITEST {
 		piano_key_on_off[key] = 0;
 	}
 private: System::Void mainForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+	int local_volume = 0;
 	if (e->KeyCode == Keys(VK_OEM_PLUS))
 	{
 		if (volume < (NVOLUME - 1)) volume += 1;
 		midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
-		//this->label3->Text = L"    Volume : " + volume;
+		//this->label3->Text = L"    Volume : "
 	}
 	else if (e->KeyCode == Keys(VK_OEM_MINUS))
 	{
@@ -780,8 +780,6 @@ private: System::Void mainForm_KeyDown(System::Object^ sender, System::Windows::
 	{
 		if (instrument < (NINSTRUMENT - 1)) instrument += 1;
 		midi_send_short_msg(h_midi_device, 0xC0, instrument, 0); // 0xC0: program change
-		//mbstowcs(instname, inst_name[instrument], strlen(inst_name[instrument]) + 1);
-		//instname2 = instname;
 		//this->label1->Text = "    Instrument : " + instname;
 	}
 	else if (e->KeyCode == Keys(VK_LEFT))
@@ -805,8 +803,14 @@ private: System::Void mainForm_KeyDown(System::Object^ sender, System::Windows::
 			if (e->KeyCode == Keys(piano_key[key]))
 				if (piano_key_on_off[key] == 0)
 				{
+
 					piano_key_on_off[key] = 1;
 					midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + key), velocity);
+					volume += 1;
+					local_volume = volume;
+					string string1 = to_string(local_volume);
+					String^ str2 = gcnew String(string1.c_str());
+					this->label3->Text = str2;
 				}
 		}
 	}
