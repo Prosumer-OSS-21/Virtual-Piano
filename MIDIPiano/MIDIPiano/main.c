@@ -22,7 +22,7 @@ int main()
 	BYTE piano_key_on_off[NKEY] = { 0 };
 
 	char inst_name[][NINSTRUMENT] = {
-		"Acoustic Grand", "Bright Acoustic", "Electric Grand", "Honkey-Tonk",
+		"x`", "Bright Acoustic", "Electric Grand", "Honkey-Tonk",
 		"Electric Piano 1", "Electric Piano 2", "Harpsichord", "Clav",
 		"Celesta", "Glockenspiel", "Music Box", "Vibraphone",
 		"Marimba", "Xylophone", "Tubular Bells", "Dulcimer",
@@ -75,7 +75,16 @@ int main()
 
 	midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
 
+	
+
+	
+
+	
+	DWORD arr[16] = { 7876752,7876736,7877264,7877248,7877776,7877760,7878032,7878016,7878544,7878528,7879056,7879040,7879568,7879552,7879824,7879808 };
+	
+
 	loop = 1;
+	
 	while (loop)
 	{
 		if (GetKeyState(VK_ESCAPE) < 0) loop = 0;
@@ -86,6 +95,7 @@ int main()
 			gotoxy(59, 2);
 			printf("Volume : %03d", volume);
 			Sleep(60);
+			
 		}
 		else if (GetKeyState(VK_OEM_MINUS) < 0)
 		{
@@ -94,6 +104,7 @@ int main()
 			gotoxy(59, 2);
 			printf("Volume : %03d", volume);
 			Sleep(60);
+			
 		}
 		else if (GetKeyState(VK_RIGHT) < 0)
 		{
@@ -102,6 +113,7 @@ int main()
 			gotoxy(1, 2);
 			printf("Instrument : %-24s", inst_name[instrument]);
 			Sleep(120);
+			
 		}
 		else if (GetKeyState(VK_LEFT) < 0)
 		{
@@ -110,6 +122,8 @@ int main()
 			gotoxy(1, 2);
 			printf("Instrument : %-24s", inst_name[instrument]);
 			Sleep(120);
+		
+			
 		}
 		else if (GetKeyState(VK_UP) < 0)
 		{
@@ -117,6 +131,7 @@ int main()
 			gotoxy(43, 2);
 			printf("Octave : %03d", octave);
 			Sleep(200);
+			gotoxy(0, 12);      			
 		}
 		else if (GetKeyState(VK_DOWN) < 0)
 		{
@@ -125,11 +140,77 @@ int main()
 			printf("Octave : %03d", octave);
 			Sleep(200);
 		}
+		else if (GetKeyState(VK_LBUTTON)<0) {
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 0), velocity);//도
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 0), velocity);//도
+			Sleep(250);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 0), velocity);//도
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 0), velocity);//도
+			Sleep(250);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//도
+			Sleep(250);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
+			Sleep(250);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
+			Sleep(250);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 9), velocity);//라
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 9), velocity);//라
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 9), velocity);//라
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 9), velocity);//라
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
+			Sleep(250);
+
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 5), velocity);//파
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 5), velocity);//파
+			Sleep(250);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 5), velocity);//파
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 5), velocity);//파
+			Sleep(250);
+
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 4), velocity);//미
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 4), velocity);//미
+			Sleep(250);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 4), velocity);//미
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 4), velocity);//미
+			Sleep(250);
+
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 1), velocity);//레
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 1), velocity);//레
+			Sleep(250);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 1), velocity);//레
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 1), velocity);//레
+			Sleep(250);
+
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 0), velocity);//도
+			Sleep(200);
+			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 0), velocity);//도
+			Sleep(250);
+		}
+
 		else
 			for (key = 0; key < NKEY; key++)
 				if (GetKeyState(piano_key[key]) < 0)
 					if (piano_key_on_off[key] == 0)
 					{
+						
 						piano_key_on_off[key] = 1;
 						midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + key), velocity);
 					}
