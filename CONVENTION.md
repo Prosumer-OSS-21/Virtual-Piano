@@ -170,3 +170,34 @@ midi_open함수에서 콜백 함수를 제거해도 동일 동작을 수행하�
 프로젝트를 진행하며 생기는 convention을 하나의 문서로 정리한다.
 commit message convention에 대해서 우선 .md 확장자 파일로 작성토록 한다. -> 본문
 ```
+
+# Coding Style Convention
+## Introduction
+사람마다 변수 이름을 선언하는 방법, 들여쓰기를 하는 방법이 다 다르다. 우리 팀은 스타일이 다르면 혼란이 생길 거라 예측했다. 따라서 코딩 스타일을 정했고 다음에 기재한다.
+
+## Indentation
+
+들여쓰기의 경우 K&R 방식, ALLMAN 방식이 있는데 우리는 그 중 ALLMAN 방식을 쓰기로 했다. 코드 블록을 구분짓기 쉽고, 주석 처리할 때 깔끔하기 때문이다.
+
+## Variable & Function
+
+변수와 함수 이름은 snake 스타일을 사용하기로 했다. 글자가 조금 길어지기는 하나 ( _ ) 가 띄어쓰기처럼 보여서 가독성이 훨씬 좋기 때문이다.
+
+## Example
+1. 들여쓰기
+```
+if(condion)
+{
+    body
+}
+```
+2. 변수 & 함수
+```
+char word_list[10];
+
+function_one(condition)
+{
+    body of the function
+}
+```
+
