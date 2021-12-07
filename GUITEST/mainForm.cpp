@@ -10,5 +10,5 @@ void Main(array<String^>^ args) {
 	//GUITEST: CLR 프로젝트 이름
 	//mainForm: cpp 파일 이름
 	GUITEST::mainForm form;
-	Application::Run(%form);
+	Application::Run(% form);
 }

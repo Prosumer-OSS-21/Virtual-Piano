@@ -75,85 +75,85 @@ void main(){
 
 	midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
 
-	loop = 1;
-	while (loop)
-	{
-		if (GetKeyState(VK_ESCAPE) < 0) loop = 0;
-		else if (GetKeyState(VK_OEM_PLUS) < 0)
-		{
-			if (volume < (NVOLUME - 1)) volume += 1;
-			midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
-			gotoxy(59, 2);
-			//printf("Volume : %03d", volume);
-			Sleep(60);
-		}
-		else if (GetKeyState(VK_OEM_MINUS) < 0)
-		{
-			if (volume != 0) volume -= 1;
-			midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
-			gotoxy(59, 2);
-			//printf("Volume : %03d", volume);
-			Sleep(60);
-		}
-		else if (GetKeyState(VK_RIGHT) < 0)
-		{
-			if (instrument < (NINSTRUMENT - 1)) instrument += 1;
-			midi_send_short_msg(h_midi_device, 0xC0, instrument, 0); // 0xC0: program change
-			gotoxy(1, 2);
-			//printf("Instrument : %-24s", inst_name[instrument]);
-			Sleep(120);
-		}
-		else if (GetKeyState(VK_LEFT) < 0)
-		{
-			if (instrument != 0) instrument -= 1;
-			midi_send_short_msg(h_midi_device, 0xC0, instrument, 0); // 0xC0: program change
-			gotoxy(1, 2);
-			//printf("Instrument : %-24s", inst_name[instrument]);
-			Sleep(120);
-		}
-		else if (GetKeyState(VK_UP) < 0)
-		{
-			if (octave < (NNOTE - NKEY)) octave += 12;
-			gotoxy(43, 2);
-			//printf("Octave : %03d", octave);
-			Sleep(200);
-		}
-		else if (GetKeyState(VK_DOWN) < 0)
-		{
-			if (octave != 0) octave -= 12;
-			gotoxy(43, 2);
-			//printf("Octave : %03d", octave);
-			Sleep(200);
-		}
-		else {
-			for (key = 0; key < NKEY; key++) {
-				if (GetKeyState(piano_key[key]) < 0)
-					if (piano_key_on_off[key] == 0)
-					{
-						piano_key_on_off[key] = 1;
-						midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + key), velocity);
-					}
-			}
-		}
+	//loop = 1;
+	//while (loop)
+	//{
+	//	if (GetKeyState(VK_ESCAPE) < 0) loop = 0;
+	//	else if (GetKeyState(VK_OEM_PLUS) < 0)
+	//	{
+	//		if (volume < (NVOLUME - 1)) volume += 1;
+	//		midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
+	//		gotoxy(59, 2);
+	//		//printf("Volume : %03d", volume);
+	//		Sleep(60);
+	//	}
+	//	else if (GetKeyState(VK_OEM_MINUS) < 0)
+	//	{
+	//		if (volume != 0) volume -= 1;
+	//		midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
+	//		gotoxy(59, 2);
+	//		//printf("Volume : %03d", volume);
+	//		Sleep(60);
+	//	}
+	//	else if (GetKeyState(VK_RIGHT) < 0)
+	//	{
+	//		if (instrument < (NINSTRUMENT - 1)) instrument += 1;
+	//		midi_send_short_msg(h_midi_device, 0xC0, instrument, 0); // 0xC0: program change
+	//		gotoxy(1, 2);
+	//		//printf("Instrument : %-24s", inst_name[instrument]);
+	//		Sleep(120);
+	//	}
+	//	else if (GetKeyState(VK_LEFT) < 0)
+	//	{
+	//		if (instrument != 0) instrument -= 1;
+	//		midi_send_short_msg(h_midi_device, 0xC0, instrument, 0); // 0xC0: program change
+	//		gotoxy(1, 2);
+	//		//printf("Instrument : %-24s", inst_name[instrument]);
+	//		Sleep(120);
+	//	}
+	//	else if (GetKeyState(VK_UP) < 0)
+	//	{
+	//		if (octave < (NNOTE - NKEY)) octave += 12;
+	//		gotoxy(43, 2);
+	//		//printf("Octave : %03d", octave);
+	//		Sleep(200);
+	//	}
+	//	else if (GetKeyState(VK_DOWN) < 0)
+	//	{
+	//		if (octave != 0) octave -= 12;
+	//		gotoxy(43, 2);
+	//		//printf("Octave : %03d", octave);
+	//		Sleep(200);
+	//	}
+	//	else {
+	//		for (key = 0; key < NKEY; key++) {
+	//			if (GetKeyState(piano_key[key]) < 0)
+	//				if (piano_key_on_off[key] == 0)
+	//				{
+	//					piano_key_on_off[key] = 1;
+	//					midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + key), velocity);
+	//				}
+	//		}
+	//	}
 
-		for (key = 0; key < NKEY; key++) {
-			if (!(GetKeyState(piano_key[key]) < 0)) {
-				if (piano_key_on_off[key] != 0)
-				{
-					piano_key_on_off[key] = 0;
-					midi_send_short_msg(h_midi_device, 0x80, (BYTE)(octave + key), velocity);
-				}
-			}
-		}
-	}
+	//	for (key = 0; key < NKEY; key++) {
+	//		if (!(GetKeyState(piano_key[key]) < 0)) {
+	//			if (piano_key_on_off[key] != 0)
+	//			{
+	//				piano_key_on_off[key] = 0;
+	//				midi_send_short_msg(h_midi_device, 0x80, (BYTE)(octave + key), velocity);
+	//			}
+	//		}
+	//	}
+	//}
 
-	for (key = 0; key < NKEY; key++) {
-		if (piano_key_on_off[key] != 0) {
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(octave + key), velocity);
-		}
-	}
+	//for (key = 0; key < NKEY; key++) {
+	//	if (piano_key_on_off[key] != 0) {
+	//		midi_send_short_msg(h_midi_device, 0x80, (BYTE)(octave + key), velocity);
+	//	}
+	//}
 
-	midi_all_channel_sound_off(h_midi_device);
+	//midi_all_channel_sound_off(h_midi_device);
 
-	midi_close(h_midi_device);
+	//midi_close(h_midi_device);
 }

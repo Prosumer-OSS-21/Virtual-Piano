@@ -1,6 +1,61 @@
-ï»¿#pragma once
-#include "main.cpp"
+#pragma once
+//#include "main.cpp"
 #include "header.h"
+
+BYTE key = 0;
+BYTE instrument = 0;
+BYTE volume = 127;   // max
+BYTE octave = 48;    // default
+BYTE velocity = 120; // default
+
+HMIDIOUT h_midi_device;
+
+BYTE piano_key[NKEY] = {
+	0x5A, 0x53, 0x58, 0x44, 0x43,             // Z S X D C
+	0x56, 0x47, 0x42, 0x48, 0x4E, 0x4A, 0x4D, // V G B H N J M
+	0x51, 0x32, 0x57, 0x33, 0x45,             // Q 2 W 3 E
+	0x52, 0x35, 0x54, 0x36, 0x59, 0x37, 0x55, // R 5 T 6 Y 7 U
+	0x49, 0x39, 0x4F, 0x30, 0x50              // I 9 O 0 P
+};
+
+BYTE piano_key_on_off[NKEY] = { 0 };
+
+char inst_name[][NINSTRUMENT] = {
+	"Acoustic Grand", "Bright Acoustic", "Electric Grand", "Honkey-Tonk",
+	"Electric Piano 1", "Electric Piano 2", "Harpsichord", "Clav",
+	"Celesta", "Glockenspiel", "Music Box", "Vibraphone",
+	"Marimba", "Xylophone", "Tubular Bells", "Dulcimer",
+	"Drawbar Organ", "Percussive Organ", "Rock Organ", "Church Organ",
+	"Reed Organ", "Accordion", "Harmonica", "Tango Accordion",
+	"Acoustic Guitar(nylon)", "Acoustic Guitar(Steel)", "Electric Guitar(Jazz)", "Electric Guitar(Clean)",
+	"Electric Guitar(muted)", "Overdriven Guitar", "Distortion Guitar", "Guitar Harmonics",
+	"Acoustic Bass", "Electric Bass(finger)", "Electric Bass(Pick)", "Fretless Bass",
+	"Slap Bass 1", "Slap Bass 2", "Synth Bass 1", "Synth Bass 2",
+	"Violin", "Viola", "Cello", "Contrabass",
+	"Tremolo Strings", "Pizzicato Strings", "Orchestral Harp", "Timpani",
+	"String Ensemble 1", "String Ensemble 2", "SynthStrings 1", "SynthStrings 2",
+	"Choir Aahs", "Voice Oohs", "Synth Voice", "orchestra Hit",
+	"Trumpet", "Trombone", "Tuba", "Muted Trumpet",
+	"French Horn", "Brass Section", "SynthBrass 1", "SynthBrass 2",
+	"Soprano Sax", "Alto Sax", "Tenor Sax", "Baritone Sax",
+	"Oboe", "English Horn", "Bassoon", "Clarinet",
+	"Piccolo", "Flute", "Recorder", "Pan Flute",
+	"Blown Bottle", "Shakuhachi", "Whistle", "Ocarina",
+	"Lead 1: square", "Lead 2: sawtooth", "Lead 3: calliope", "Lead 4: chiff",
+	"Lead 5: charang", "Lead 6: voice", "Lead 7: fifths", "Lead 8: bass+lead",
+	"Pad 1: new age", "Pad 2: warm", "Pad 3: polysynth", "Pad 4: choir",
+	"Pad 5: bowed", "Pad 6: voice", "Pad 7: halo", "Pad 8: sweep",
+	"FX 1: rain", "FX 2: soundtrack", "FX 3: crystal", "FX 4: atmosphere",
+	"FX 5: brightness", "FX 6: goblins", "FX 7: echoes", "FX 8: sci-fi",
+	"Sitar", "Banjo", "Shamisen", "Koto",
+	"Kalimba", "Bagpipe", "Fiddle", "Shanai",
+	"Tinkle Bell", "Agogo", "Steel Drums", "Woodblock",
+	"Taiko Drum", "Melodic Tom", "Synth Drum", "Reverse Cymbal",
+	"Guitar Fret Noise", "Breath Noise", "Seashore", "Bird Tweet",
+	"Telephone Ring", "Helicopter", "Applause", "Gunshot"
+};
+wchar_t instname[128];
+LPWSTR instname2;
 
 namespace GUITEST {
 
@@ -12,7 +67,7 @@ namespace GUITEST {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// mainFormì— ëŒ€í•œ ìš”ì•½ì…ë‹ˆë‹¤.
+	/// mainForm¿¡ ´ëÇÑ ¿ä¾àÀÔ´Ï´Ù.
 	/// </summary>
 	public ref class mainForm : public System::Windows::Forms::Form
 	{
@@ -21,13 +76,14 @@ namespace GUITEST {
 		{
 			InitializeComponent();
 			//
-			//TODO: ìƒì„±ì ì½”ë“œë¥¼ ì—¬ê¸°ì— ì¶”ê°€í•©ë‹ˆë‹¤.
+			//TODO: »ı¼ºÀÚ ÄÚµå¸¦ ¿©±â¿¡ Ãß°¡ÇÕ´Ï´Ù.
 			//
+
 		}
 
 	protected:
 		/// <summary>
-		/// ì‚¬ìš© ì¤‘ì¸ ëª¨ë“  ë¦¬ì†ŒìŠ¤ë¥¼ ì •ë¦¬í•©ë‹ˆë‹¤.
+		/// »ç¿ë ÁßÀÎ ¸ğµç ¸®¼Ò½º¸¦ Á¤¸®ÇÕ´Ï´Ù.
 		/// </summary>
 		~mainForm()
 		{
@@ -78,14 +134,14 @@ namespace GUITEST {
 
 	private:
 		/// <summary>
-		/// í•„ìˆ˜ ë””ìì´ë„ˆ ë³€ìˆ˜ì…ë‹ˆë‹¤.
+		/// ÇÊ¼ö µğÀÚÀÌ³Ê º¯¼öÀÔ´Ï´Ù.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// ë””ìì´ë„ˆ ì§€ì›ì— í•„ìš”í•œ ë©”ì„œë“œì…ë‹ˆë‹¤. 
-		/// ì´ ë©”ì„œë“œì˜ ë‚´ìš©ì„ ì½”ë“œ í¸ì§‘ê¸°ë¡œ ìˆ˜ì •í•˜ì§€ ë§ˆì„¸ìš”.
+		/// µğÀÚÀÌ³Ê Áö¿ø¿¡ ÇÊ¿äÇÑ ¸Ş¼­µåÀÔ´Ï´Ù. 
+		/// ÀÌ ¸Ş¼­µåÀÇ ³»¿ëÀ» ÄÚµå ÆíÁı±â·Î ¼öÁ¤ÇÏÁö ¸¶¼¼¿ä.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -130,7 +186,7 @@ namespace GUITEST {
 			this->button2->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button2->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button2->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button2->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button2->Location = System::Drawing::Point(0, 82);
 			this->button2->Name = L"button2";
@@ -139,6 +195,7 @@ namespace GUITEST {
 			this->button2->Text = L"Z";
 			this->button2->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &mainForm::button2_Click);
 			// 
 			// button3
 			// 
@@ -147,7 +204,7 @@ namespace GUITEST {
 			this->button3->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button3->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button3->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button3->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button3->Location = System::Drawing::Point(69, 82);
 			this->button3->Name = L"button3";
@@ -164,7 +221,7 @@ namespace GUITEST {
 			this->button4->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button4->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button4->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button4->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button4->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button4->Location = System::Drawing::Point(207, 82);
 			this->button4->Name = L"button4";
@@ -181,7 +238,7 @@ namespace GUITEST {
 			this->button5->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button5->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button5->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button5->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button5->Location = System::Drawing::Point(138, 82);
 			this->button5->Name = L"button5";
@@ -198,7 +255,7 @@ namespace GUITEST {
 			this->button6->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button6->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button6->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button6->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button6->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button6->Location = System::Drawing::Point(414, 82);
 			this->button6->Name = L"button6";
@@ -215,7 +272,7 @@ namespace GUITEST {
 			this->button7->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button7->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button7->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button7->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button7->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button7->Location = System::Drawing::Point(345, 82);
 			this->button7->Name = L"button7";
@@ -232,7 +289,7 @@ namespace GUITEST {
 			this->button8->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button8->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button8->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button8->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button8->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button8->Location = System::Drawing::Point(276, 82);
 			this->button8->Name = L"button8";
@@ -247,7 +304,7 @@ namespace GUITEST {
 			this->button9->BackColor = System::Drawing::Color::Black;
 			this->button9->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button9->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button9->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button9->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button9->ForeColor = System::Drawing::Color::White;
 			this->button9->Location = System::Drawing::Point(49, 82);
@@ -263,7 +320,7 @@ namespace GUITEST {
 			this->button10->BackColor = System::Drawing::Color::Black;
 			this->button10->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button10->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button10->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button10->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button10->ForeColor = System::Drawing::Color::White;
 			this->button10->Location = System::Drawing::Point(118, 82);
@@ -279,7 +336,7 @@ namespace GUITEST {
 			this->button11->BackColor = System::Drawing::Color::Black;
 			this->button11->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button11->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button11->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button11->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button11->ForeColor = System::Drawing::Color::White;
 			this->button11->Location = System::Drawing::Point(256, 82);
@@ -295,7 +352,7 @@ namespace GUITEST {
 			this->button12->BackColor = System::Drawing::Color::Black;
 			this->button12->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button12->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button12->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button12->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button12->ForeColor = System::Drawing::Color::White;
 			this->button12->Location = System::Drawing::Point(325, 82);
@@ -311,7 +368,7 @@ namespace GUITEST {
 			this->button13->BackColor = System::Drawing::Color::Black;
 			this->button13->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button13->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button13->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button13->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button13->ForeColor = System::Drawing::Color::White;
 			this->button13->Location = System::Drawing::Point(394, 82);
@@ -327,7 +384,7 @@ namespace GUITEST {
 			this->button14->BackColor = System::Drawing::Color::Black;
 			this->button14->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button14->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button14->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button14->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button14->ForeColor = System::Drawing::Color::White;
 			this->button14->Location = System::Drawing::Point(877, 82);
@@ -343,7 +400,7 @@ namespace GUITEST {
 			this->button15->BackColor = System::Drawing::Color::Black;
 			this->button15->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button15->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button15->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button15->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button15->ForeColor = System::Drawing::Color::White;
 			this->button15->Location = System::Drawing::Point(808, 82);
@@ -359,7 +416,7 @@ namespace GUITEST {
 			this->button16->BackColor = System::Drawing::Color::Black;
 			this->button16->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button16->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button16->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button16->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button16->ForeColor = System::Drawing::Color::White;
 			this->button16->Location = System::Drawing::Point(739, 82);
@@ -375,7 +432,7 @@ namespace GUITEST {
 			this->button17->BackColor = System::Drawing::Color::Black;
 			this->button17->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button17->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button17->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button17->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button17->ForeColor = System::Drawing::Color::White;
 			this->button17->Location = System::Drawing::Point(601, 82);
@@ -391,7 +448,7 @@ namespace GUITEST {
 			this->button18->BackColor = System::Drawing::Color::Black;
 			this->button18->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button18->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button18->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button18->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button18->ForeColor = System::Drawing::Color::White;
 			this->button18->Location = System::Drawing::Point(532, 82);
@@ -409,7 +466,7 @@ namespace GUITEST {
 			this->button19->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button19->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button19->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button19->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button19->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button19->Location = System::Drawing::Point(897, 82);
 			this->button19->Name = L"button19";
@@ -426,7 +483,7 @@ namespace GUITEST {
 			this->button20->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button20->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button20->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button20->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button20->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button20->Location = System::Drawing::Point(828, 82);
 			this->button20->Name = L"button20";
@@ -443,7 +500,7 @@ namespace GUITEST {
 			this->button21->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button21->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button21->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button21->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button21->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button21->Location = System::Drawing::Point(759, 82);
 			this->button21->Name = L"button21";
@@ -460,7 +517,7 @@ namespace GUITEST {
 			this->button22->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button22->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button22->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button22->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button22->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button22->Location = System::Drawing::Point(690, 82);
 			this->button22->Name = L"button22";
@@ -477,7 +534,7 @@ namespace GUITEST {
 			this->button23->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button23->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button23->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button23->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button23->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button23->Location = System::Drawing::Point(621, 82);
 			this->button23->Name = L"button23";
@@ -494,7 +551,7 @@ namespace GUITEST {
 			this->button24->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button24->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button24->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button24->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button24->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button24->Location = System::Drawing::Point(552, 82);
 			this->button24->Name = L"button24";
@@ -511,7 +568,7 @@ namespace GUITEST {
 			this->button25->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button25->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button25->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button25->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button25->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button25->Location = System::Drawing::Point(483, 82);
 			this->button25->Name = L"button25";
@@ -526,7 +583,7 @@ namespace GUITEST {
 			this->button26->BackColor = System::Drawing::Color::Black;
 			this->button26->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button26->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button26->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button26->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button26->ForeColor = System::Drawing::Color::White;
 			this->button26->Location = System::Drawing::Point(1084, 82);
@@ -542,7 +599,7 @@ namespace GUITEST {
 			this->button27->BackColor = System::Drawing::Color::Black;
 			this->button27->FlatAppearance->BorderColor = System::Drawing::Color::Black;
 			this->button27->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button27->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button27->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button27->ForeColor = System::Drawing::Color::White;
 			this->button27->Location = System::Drawing::Point(1015, 82);
@@ -560,7 +617,7 @@ namespace GUITEST {
 			this->button28->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button28->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button28->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button28->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button28->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button28->Location = System::Drawing::Point(1104, 82);
 			this->button28->Name = L"button28";
@@ -577,7 +634,7 @@ namespace GUITEST {
 			this->button29->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button29->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button29->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button29->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button29->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button29->Location = System::Drawing::Point(1035, 82);
 			this->button29->Name = L"button29";
@@ -594,7 +651,7 @@ namespace GUITEST {
 			this->button30->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->button30->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
 			this->button30->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button30->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button30->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->button30->Location = System::Drawing::Point(966, 82);
 			this->button30->Name = L"button30";
@@ -608,7 +665,7 @@ namespace GUITEST {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->BackColor = System::Drawing::Color::White;
-			this->label1->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ ExtraBold", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î ExtraBold", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->label1->Location = System::Drawing::Point(14, 27);
 			this->label1->Name = L"label1";
@@ -620,7 +677,7 @@ namespace GUITEST {
 			// 
 			this->label2->AutoSize = true;
 			this->label2->BackColor = System::Drawing::Color::White;
-			this->label2->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ ExtraBold", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label2->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î ExtraBold", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->label2->Location = System::Drawing::Point(658, 27);
 			this->label2->Name = L"label2";
@@ -632,7 +689,7 @@ namespace GUITEST {
 			// 
 			this->label3->AutoSize = true;
 			this->label3->BackColor = System::Drawing::Color::White;
-			this->label3->Font = (gcnew System::Drawing::Font(L"ë‚˜ëˆ”ìŠ¤í€˜ì–´ ExtraBold", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label3->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î ExtraBold", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->label3->Location = System::Drawing::Point(885, 27);
 			this->label3->Name = L"label3";
@@ -679,17 +736,91 @@ namespace GUITEST {
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
 			this->HelpButton = true;
+			this->KeyPreview = true;
 			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"mainForm";
 			this->Text = L"Piano";
 			this->Load += gcnew System::EventHandler(this, &mainForm::mainForm_Load);
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &mainForm::mainForm_KeyDown);
+			this->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &mainForm::mainForm_KeyUp);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	private: System::Void mainForm_Load(System::Object^ sender, System::EventArgs^ e) {
-		
+		this->label1->Text = L"    Instrument : Test";
+		h_midi_device = midi_open(0);
+
+		if (h_midi_device == NULL) return;
+
+		midi_all_channel_sound_off(h_midi_device);
+
+		midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
 	}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		piano_key_on_off[key] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + key), velocity);
+		piano_key_on_off[key] = 0;
+	}
+private: System::Void mainForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+	if (e->KeyCode == Keys(VK_OEM_PLUS))
+	{
+		if (volume < (NVOLUME - 1)) volume += 1;
+		midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
+		//this->label3->Text = L"    Volume : " + volume;
+	}
+	else if (e->KeyCode == Keys(VK_OEM_MINUS))
+	{
+		if (volume != 0) volume -= 1;
+		midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
+		//this->label3->Text = L"    Volume : " + volume;
+	}
+	else if (e->KeyCode == Keys(VK_RIGHT))
+	{
+		if (instrument < (NINSTRUMENT - 1)) instrument += 1;
+		midi_send_short_msg(h_midi_device, 0xC0, instrument, 0); // 0xC0: program change
+		//mbstowcs(instname, inst_name[instrument], strlen(inst_name[instrument]) + 1);
+		//instname2 = instname;
+		//this->label1->Text = "    Instrument : " + instname;
+	}
+	else if (e->KeyCode == Keys(VK_LEFT))
+	{
+		if (instrument != 0) instrument -= 1;
+		midi_send_short_msg(h_midi_device, 0xC0, instrument, 0); // 0xC0: program change
+		//printf("Instrument : %-24s", inst_name[instrument]);
+	}
+	else if (e->KeyCode == Keys(VK_UP))
+	{
+		if (octave < (NNOTE - NKEY)) octave += 12;
+		//printf("Octave : %03d", octave);
+	}
+	else if (e->KeyCode == Keys(VK_DOWN))
+	{
+		if (octave != 0) octave -= 12;
+		//printf("Octave : %03d", octave);
+	}
+	else {
+		for (key = 0; key < NKEY; key++) {
+			if (e->KeyCode == Keys(piano_key[key]))
+				if (piano_key_on_off[key] == 0)
+				{
+					piano_key_on_off[key] = 1;
+					midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + key), velocity);
+				}
+		}
+	}
+}
+private: System::Void mainForm_KeyUp(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+	for (key = 0; key < NKEY; key++) {
+		if (e->KeyCode == Keys(piano_key[key])) {
+			if (piano_key_on_off[key] != 0)
+			{
+				piano_key_on_off[key] = 0;
+				midi_send_short_msg(h_midi_device, 0x80, (BYTE)(octave + key), velocity);
+			}
+		}
+	}
+}
 };
 }

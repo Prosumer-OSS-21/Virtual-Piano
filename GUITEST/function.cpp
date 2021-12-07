@@ -15,7 +15,6 @@ void midi_output_error(MMRESULT mm_result)
 	LPWSTR err_msg = w_sz_err_msg;
 	LPWSTR err_msg_text = L"Midi Error!!!";
 	midiInGetErrorText(mm_result, err_msg, sizeof(sz_err_msg));
-
 	MessageBox(0, err_msg, err_msg_text, MB_OK);
 }
 

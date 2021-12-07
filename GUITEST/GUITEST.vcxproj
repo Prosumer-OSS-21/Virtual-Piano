@@ -114,14 +114,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="mainForm.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="GUITEST2.vcxproj">
+      <Project>{8248b27c-3125-4e24-9c35-7800999e8803}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="mainForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mainForm.h">
@@ -132,11 +137,6 @@
     <EmbeddedResource Include="mainForm.resx">
       <DependentUpon>mainForm.h</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="GUITEST2.vcxproj">
-      <Project>{8248b27c-3125-4e24-9c35-7800999e8803}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
