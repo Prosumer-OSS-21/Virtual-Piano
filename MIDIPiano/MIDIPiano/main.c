@@ -80,9 +80,16 @@ int main()
 	
 
 	
-	int small_star[10000] =   {0.0,7,7,9,9,7,100,5,5,4,4,14,14,12,100,100,7,7,5,5,4,4,14,100,7,7,5,5,4,4,14,100,100,12.12,7,7,9,9,7,100,5,5,4,4,14,14,12,100, '\0'};
+	int small_star[10000] =   { 1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100,1008,8,6,6,5,5,3,100,8,8,6,6,5,5,3,100,100,1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100, '\0'};
 	int shcool_bell[10000] = { 8,8,10,10,8,8,5,100,8,8,5,5,3,100,100,100,8,8,10,10,8,8,5,100,8,5,3,5,1,100,'\0' };
+	int Edelweiss[10000] = { 5,8,3,1,8,6,5,5,5,8,10,8,100,100,5,8,3,1,8,6,5,8,8,10,12,1,100,'\0' };
+	int mountain_rabbit[1000] = { 8,105,105,108,105,1,100,3,105,103,101,105,8,100,100,101,108,101,108,101,108,5,100,  8, 103,106,105,103,1,100,'\0'};
+
 	//100은 소리가 안나면서 박자를 맞추기 위함
+	//1000ms 1초이다
+	//bpm 60인건 1분안에 60번
+	//기준점 600ms는 4분에 1박이라는 개념 
+	//300ms 1/2박이라는 개념
 	int ar2 = 0;
 
 	loop = 1;
@@ -146,25 +153,41 @@ int main()
 		}
 		else if (GetKeyState(VK_LBUTTON)<0) {
 
-			while (shcool_bell[ar2] != '\0')
+			Sleep(2000);	
+			while (mountain_rabbit[ar2] != '\0')
 			{
-				midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + shcool_bell[ar2] + 11), velocity);
+				
+				if (mountain_rabbit[ar2]>100)
+				{
+					//1/2박
+					midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + mountain_rabbit[ar2] + 11-100), velocity);
+					Sleep(300);
+					ar2++;
+				}
+				else if (mountain_rabbit[ar2] == 100) {
+					midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + mountain_rabbit[ar2]), velocity);
+					Sleep(600);
+					ar2++;
+				}
+				else
+				{
+					midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + mountain_rabbit[ar2] + 11), velocity);
+					Sleep(600);
+					ar2++;
+				}
+				
+				
+			}
+		/*	while (small_star[ar2]!='\0')
+			{
+				midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + small_star[ar2] + 11), velocity);
 				Sleep(500);
 				ar2++;
-
-			}
+			}*/
 
 				
 			
-			/*int i = 0;
-			while (i<=50)
-			{
-				midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + 0 + 11), velocity);
-				Sleep(500);
-				midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + 1 + 11), velocity);
-				Sleep(500);
-				i++;
-			}*/
+			
 			
 		}
 			
