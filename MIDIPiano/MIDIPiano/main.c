@@ -80,10 +80,13 @@ int main()
 	
 
 	
-	DWORD arr[16] = { 7876752,7876736,7877264,7877248,7877776,7877760,7878032,7878016,7878544,7878528,7879056,7879040,7879568,7879552,7879824,7879808 };
-	
+	int small_star[10000] =   {0.0,7,7,9,9,7,100,5,5,4,4,14,14,12,100,100,7,7,5,5,4,4,14,100,7,7,5,5,4,4,14,100,100,12.12,7,7,9,9,7,100,5,5,4,4,14,14,12,100, '\0'};
+	int shcool_bell[10000] = { 8,8,10,10,8,8,5,100,8,8,5,5,3,100,100,100,8,8,10,10,8,8,5,100,8,5,3,5,1,100,'\0' };
+	//100은 소리가 안나면서 박자를 맞추기 위함
+	int ar2 = 0;
 
 	loop = 1;
+	
 	
 	while (loop)
 	{
@@ -139,193 +142,32 @@ int main()
 			gotoxy(43, 2);
 			printf("Octave : %03d", octave);
 			Sleep(200);
+			
 		}
 		else if (GetKeyState(VK_LBUTTON)<0) {
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 0), velocity);//도
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 0), velocity);//도
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 0), velocity);//도
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 0), velocity);//도
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 9), velocity);//라
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 9), velocity);//라
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 9), velocity);//라
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 9), velocity);//라
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
-			Sleep(250);
 
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 5), velocity);//파
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 5), velocity);//파
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 5), velocity);//파
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 5), velocity);//파
-			Sleep(250);
+			while (shcool_bell[ar2] != '\0')
+			{
+				midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + shcool_bell[ar2] + 11), velocity);
+				Sleep(500);
+				ar2++;
 
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 4), velocity);//미
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 4), velocity);//미
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 4), velocity);//미
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 4), velocity);//미
-			Sleep(250);
+			}
 
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 1), velocity);//레
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 1), velocity);//레
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 1), velocity);//레
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 1), velocity);//레
-			Sleep(250);
-
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 0), velocity);//도
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 0), velocity);//도
-			Sleep(250);
-
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 5), velocity);//파
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 5), velocity);//파
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 5), velocity);//파
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 5), velocity);//파
-			Sleep(250);
-
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 4), velocity);//미
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 4), velocity);//미
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 4), velocity);//미
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 4), velocity);//미
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 1), velocity);//레
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 1), velocity);//레
-			Sleep(250);
-
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 5), velocity);//파
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 5), velocity);//파
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 5), velocity);//파
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 5), velocity);//파
-			Sleep(250);	
-
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 4), velocity);//미
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 4), velocity);//미
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 4), velocity);//미
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 4), velocity);//미
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 1), velocity);//레
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 1), velocity);//레
-			Sleep(250);
-
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 0), velocity);//도
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 0), velocity);//도
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 0), velocity);//도
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 0), velocity);//도
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
-			Sleep(250);
-
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 9), velocity);//라
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 9), velocity);//라
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 9), velocity);//라
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 9), velocity);//라
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 7), velocity);//솔
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 7), velocity);//솔
-			Sleep(250);
-
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 5), velocity);//파
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 5), velocity);//파
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 5), velocity);//파
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 5), velocity);//파
-			Sleep(250);
-
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 4), velocity);//미
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 4), velocity);//미
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 4), velocity);//미
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 4), velocity);//미
-			Sleep(250);
-
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 1), velocity);//레
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 1), velocity);//레
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 1), velocity);//레
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 1), velocity);//레
-			Sleep(250);
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(48 + 0), velocity);//도
-			Sleep(200);
-			midi_send_short_msg(h_midi_device, 0x80, (BYTE)(48 + 0), velocity);//도
-			Sleep(250);
-				  
-
+				
+			
+			/*int i = 0;
+			while (i<=50)
+			{
+				midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + 0 + 11), velocity);
+				Sleep(500);
+				midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + 1 + 11), velocity);
+				Sleep(500);
+				i++;
+			}*/
+			
 		}
-
+			
 		else
 			for (key = 0; key < NKEY; key++)
 				if (GetKeyState(piano_key[key]) < 0)
