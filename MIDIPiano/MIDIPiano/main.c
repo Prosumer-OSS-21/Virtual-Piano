@@ -55,6 +55,7 @@ int main()
 		"Guitar Fret Noise", "Breath Noise", "Seashore", "Bird Tweet",
 		"Telephone Ring", "Helicopter", "Applause", "Gunshot"
 	};
+	char music_name[][100] = {"smallstar","schoolbell","mountinrabbit","biycle"};
 
 	h_midi_device = midi_open(0);
 
@@ -78,7 +79,7 @@ int main()
 	
 
 	
-	int note[10][10000] = { { 1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100,1008,8,6,6,5,5,3,100,8,8,6,6,5,5,3,100,100,1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100, '\0'}
+	int note[10][10000] = { { 1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100,100,8,8,6,6,5,5,3,100,8,8,6,6,5,5,3,100,100,1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100, '\0'}
 	                       ,{ 8,8,10,10,8,8,5,100,8,8,5,5,3,100,100,100,8,8,10,10,8,8,5,100,8,5,3,5,1,100,'\0' } 
 	                       ,{ 5,8,3,1,8,6,5,5,5,8,10,8,100,100,5,8,3,1,8,6,5,8,8,10,12,1,100,'\0' } 
 	                       ,{ 8,105,105,108,105,1,100,3,105,103,101,105,8,100,100,101,108,101,108,101,108,5,100,  8, 103,106,105,103,1,100,'\0'}};
@@ -87,20 +88,25 @@ int main()
 	int shcool_bell[10000]= { 8,8,10,10,8,8,5,100,8,8,5,5,3,100,100,100,8,8,10,10,8,8,5,100,8,5,3,5,1,100,'\0' };
 	int Edelweiss[10000];
 	int mountain_rabbit[1000]= { 8,105,105,108,105,1,100,3,105,103,101,105,8,100,100,101,108,101,108,101,108,5,100,  8, 103,106,105,103,1,100,'\0' };
-	int bicycle[1000] = { 105 ,108, 8, 105,108,8 ,10,110,110,110,110,10 ,100,108,108,108,108 ,106,106,106,106, 105,105,105,105,5,100,105,108,108,108,105,108,8 ,110, 110 ,105,105,8,100,106,106,106,106, 105,105,105,105 ,103,103,108,108,1,'\0'};
+	int bicycle[10000] = { 105 ,108, 8, 105,108,8 ,10,110,110,110,110,10 ,100,108,108,108,108 ,106,106,106,106, 105,105,105,105,5,100,105,108,108,108,105,108,8 ,110, 110 ,105,105,8,100,106,106,106,106, 105,105,105,105 ,103,103,108,108,1,'\0'};
+	int airplane[10000] = { 305 ,403, 1, 3, 5 ,5 ,105 ,100,3, 3, 3 ,5, 5, 105 ,100,305,403,1,3,5,5,105,100,3,3,305,403,501,'\0' };
 
 	//100은 소리가 안나면서 박자를 맞추기 위함
 	//1000ms 1초이다
-	//bpm 60인건 1분안에 60번
-	//기준점 600ms는 4분에 1박이라는 개념 
-	//300ms 1/2박이라는 개념
+	//bpm 120을 기준을 작성하였다.
+	//기준점 500ms는 4분에 1박이라는 개념 10의 자리수
+	//250ms 1/8박이라는 개념 100의 자리수
+	//375 1/8.박 300자리수
+	//125 1/16 400자리수 
+	//1000ms 1/2박 500자리수 
 	int ar2 = 0;
 
 	loop = 1;
-	
+	int bpm = 120;
 	
 	while (loop)
 	{
+		int ar2 = 0;
 		if (GetKeyState(VK_ESCAPE) < 0) loop = 0;
 		else if (GetKeyState(VK_OEM_PLUS) < 0)
 		{
@@ -158,29 +164,98 @@ int main()
 		else if (GetKeyState(VK_LBUTTON)<0) {
 
 			Sleep(2000);	
-			
-				while (bicycle[ar2]!='\0')
+			int note1[1000];
+			while (note[0][ar2] != '\0')
 			{
-				if (bicycle[ar2] > 100)
-				{
-				 //1/2박
-					midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + bicycle[ar2] -100+11), velocity);
-					Sleep(300);
-					ar2++;
-				}
-				else if (mountain_rabbit[ar2] == 100) 
-				{
-					midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + bicycle[ar2] + 11), velocity);
-					Sleep(400);
-					ar2++;
-				}
-				else
-			    {
-					midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + bicycle[ar2] + 11), velocity);
-					Sleep(600);
-					ar2++;
-			    }
+				note1[ar2] = note[0][ar2];
+				ar2++;
 			}
+			ar2 = 0;
+		
+						/*printf("%d\n", note1);*/
+			while (note1[ar2] != '\0')
+			{
+				
+	
+				
+				music_note(h_midi_device, note1, velocity, bpm);
+				ar2++;
+				
+
+			}
+			//while (airplane[ar2] != '\0')
+			//{
+			//	if (airplane[ar2] > 100 && airplane[ar2] < 200)
+			//	{
+			//		//1/8박
+			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] - 100 + 11), velocity);
+			//		Sleep(250);
+			//		ar2++;
+			//	}
+			//	else if (mountain_rabbit[ar2] == 100)
+			//	{
+			//		//쉼표
+			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2]), velocity);
+			//		Sleep(400);
+			//		ar2++;
+			//	}
+			//	else if (airplane[ar2] > 200 && airplane[ar2] < 300)
+			//	{
+			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] - 200 + 11), velocity);
+			//		Sleep(400);
+			//		ar2++;
+			//	}
+			//	else if (airplane[ar2] > 300 && airplane[ar2] < 400)
+			//	{
+			//		//1/8.박
+			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] - 300 + 11), velocity);
+			//		Sleep(375);
+			//		ar2++;
+			//	}
+			//	else if (airplane[ar2] > 400 && airplane[ar2] < 500)
+			//	{
+			//		//1/16박
+			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] - 400 + 11), velocity);
+			//		Sleep(125);
+			//		ar2++;
+			//	}
+			//	else if (airplane[ar2] > 500 && airplane[ar2] < 600)
+			//	{
+			//		//1/16박
+			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] - 500 + 11), velocity);
+			//		Sleep(1000);
+			//		ar2++;
+			//	}
+			//	else
+			//	{
+			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] + 11), velocity);
+			//		Sleep(500);
+			//		ar2++;
+			//	}
+			//}
+			//	while (bicycle[ar2]!='\0')
+			//{
+			//	if (bicycle[ar2] > 100)
+			//	{
+			//	 //1/2박
+			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + bicycle[ar2] -100+11), velocity);
+			//		Sleep(250);
+			//		ar2++;
+			//	}
+			//	else if (mountain_rabbit[ar2] == 100) 
+			//	{
+			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + bicycle[ar2] + 11), velocity);
+			//		Sleep(400);
+			//		ar2++;
+			//	}
+			//	else
+			//    {
+			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + bicycle[ar2] + 11), velocity);
+			//		Sleep(500);
+			//		ar2++;
+			//    }
+			//}
+			
 				//while (mountain_rabbit[ar2] != '\0')
 			//{
 			//	
