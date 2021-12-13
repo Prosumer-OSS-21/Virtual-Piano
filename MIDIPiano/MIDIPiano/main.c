@@ -3,6 +3,7 @@
 int main()
 {
 	int loop;
+	int telling = 0;
 	BYTE key = 0;
 	BYTE instrument = 0;
 	BYTE volume = 127;   // max
@@ -55,7 +56,7 @@ int main()
 		"Guitar Fret Noise", "Breath Noise", "Seashore", "Bird Tweet",
 		"Telephone Ring", "Helicopter", "Applause", "Gunshot"
 	};
-	char music_name[][100] = {"smallstar","schoolbell","mountinrabbit","biycle"};
+	char music_name[][NINSTRUMENT] = { "x`","smallstar","schoolbell","mountinrabbit","biycle","airplane"};
 
 	h_midi_device = midi_open(0);
 
@@ -63,6 +64,7 @@ int main()
 
 	printf("[ESC]: Exit\n\n");
 	printf(" Instrument : %-25s    Octave : %03d    Volume : %03d\n\n", inst_name[0], octave, volume);
+	printf("   musicname : %s\n\n", music_name[0]);
 	puts(" │  │  │ │  │   │  │  │ │  │ │  │   │   │  │ │  │  │  │  │ │  │ │  │   │  │  │ │  │   │");
 	puts(" │  │  │ │  │   │  │  │ │  │ │  │   │   │  │ │  │  │  │  │ │  │ │  │   │  │  │ │  │   │");
 	puts(" │  │  │ │  │   │  │  │ │  │ │  │   │   │  │ │  │  │  │  │ │  │ │  │   │  │  │ │  │   │");
@@ -80,14 +82,15 @@ int main()
 
 	
 	int note[10][10000] = { { 1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100,100,8,8,6,6,5,5,3,100,8,8,6,6,5,5,3,100,100,1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100, '\0'}
-	                       ,{ 8,8,10,10,8,8,5,100,8,8,5,5,3,100,100,100,8,8,10,10,8,8,5,100,8,5,3,5,1,100,'\0' } 
-	                       ,{ 5,8,3,1,8,6,5,5,5,8,10,8,100,100,5,8,3,1,8,6,5,8,8,10,12,1,100,'\0' } 
-	                       ,{ 8,105,105,108,105,1,100,3,105,103,101,105,8,100,100,101,108,101,108,101,108,5,100,  8, 103,106,105,103,1,100,'\0'}};
+	                       ,{ 8,8,10,10,8,8,5,100,8,8,5,5,3,100,100,100,8,8,10,10,8,8,5,100,8,5,3,5,1,100,'\0' }
+	                       ,{ 8,105,105,108,105,1,100,3,105,103,101,105,8,100,100,101,108,101,108,101,108,5,100,  8, 103,106,105,103,1,100,'\0'}
+		                   ,{ 105 ,108, 8, 105,108,8 ,10,110,110,110,110,10 ,100,108,108,108,108 ,106,106,106,106, 105,105,105,105,5,100,105,108,108,108,105,108,8 ,110, 110 ,105,105,8,100,106,106,106,106, 105,105,105,105 ,103,103,108,108,1,'\0'}
+	                       ,{ 305 ,403, 1, 3, 5 ,5 ,105 ,100,3, 3, 3 ,5, 5, 105 ,100,305,403,1,3,5,5,105,100,3,3,305,403,501,'\0' } 
+	                        };
 	
 	int small_star[10000]= { 1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100,1008,8,6,6,5,5,3,100,8,8,6,6,5,5,3,100,100,1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100, '\0' };
 	int shcool_bell[10000]= { 8,8,10,10,8,8,5,100,8,8,5,5,3,100,100,100,8,8,10,10,8,8,5,100,8,5,3,5,1,100,'\0' };
-	int Edelweiss[10000];
-	int mountain_rabbit[1000]= { 8,105,105,108,105,1,100,3,105,103,101,105,8,100,100,101,108,101,108,101,108,5,100,  8, 103,106,105,103,1,100,'\0' };
+	int hare[1000]= { 8,105,105,108,105,1,100,3,105,103,101,105,8,100,100,101,108,101,108,101,108,5,100,  8, 103,106,105,103,1,100,'\0' };
 	int bicycle[10000] = { 105 ,108, 8, 105,108,8 ,10,110,110,110,110,10 ,100,108,108,108,108 ,106,106,106,106, 105,105,105,105,5,100,105,108,108,108,105,108,8 ,110, 110 ,105,105,8,100,106,106,106,106, 105,105,105,105 ,103,103,108,108,1,'\0'};
 	int airplane[10000] = { 305 ,403, 1, 3, 5 ,5 ,105 ,100,3, 3, 3 ,5, 5, 105 ,100,305,403,1,3,5,5,105,100,3,3,305,403,501,'\0' };
 
@@ -161,135 +164,40 @@ int main()
 			Sleep(200);
 			
 		}
+		else if (GetKeyState(VK_F1) < 0)
+		{
+			if (telling < (5 - 1)) telling += 1;
+			gotoxy(4, 4);
+			printf(" musicname : %-25s", music_name[telling]);
+			Sleep(120);
+
+		}
+		else if (GetKeyState(VK_F2) < 0)
+		{
+			if (telling != 0) telling -= 1;
+			gotoxy(4, 4);
+			printf(" musicname : %-25s", music_name[telling]);
+			Sleep(120);
+
+
+		}
 		else if (GetKeyState(VK_LBUTTON)<0) {
 
 			Sleep(2000);	
 			int note1[1000];
-			while (note[0][ar2] != '\0')
+			while (note[telling][ar2] != '\0')
 			{
-				note1[ar2] = note[0][ar2];
+				note1[ar2] = note[telling][ar2];
 				ar2++;
 			}
 			ar2 = 0;
-		
-						/*printf("%d\n", note1);*/
-			while (note1[ar2] != '\0')
-			{
 				
-	
+			
+			music_note(h_midi_device, note1, velocity, bpm);
 				
-				music_note(h_midi_device, note1, velocity, bpm);
-				ar2++;
 				
 
-			}
-			//while (airplane[ar2] != '\0')
-			//{
-			//	if (airplane[ar2] > 100 && airplane[ar2] < 200)
-			//	{
-			//		//1/8박
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] - 100 + 11), velocity);
-			//		Sleep(250);
-			//		ar2++;
-			//	}
-			//	else if (mountain_rabbit[ar2] == 100)
-			//	{
-			//		//쉼표
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2]), velocity);
-			//		Sleep(400);
-			//		ar2++;
-			//	}
-			//	else if (airplane[ar2] > 200 && airplane[ar2] < 300)
-			//	{
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] - 200 + 11), velocity);
-			//		Sleep(400);
-			//		ar2++;
-			//	}
-			//	else if (airplane[ar2] > 300 && airplane[ar2] < 400)
-			//	{
-			//		//1/8.박
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] - 300 + 11), velocity);
-			//		Sleep(375);
-			//		ar2++;
-			//	}
-			//	else if (airplane[ar2] > 400 && airplane[ar2] < 500)
-			//	{
-			//		//1/16박
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] - 400 + 11), velocity);
-			//		Sleep(125);
-			//		ar2++;
-			//	}
-			//	else if (airplane[ar2] > 500 && airplane[ar2] < 600)
-			//	{
-			//		//1/16박
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] - 500 + 11), velocity);
-			//		Sleep(1000);
-			//		ar2++;
-			//	}
-			//	else
-			//	{
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + airplane[ar2] + 11), velocity);
-			//		Sleep(500);
-			//		ar2++;
-			//	}
-			//}
-			//	while (bicycle[ar2]!='\0')
-			//{
-			//	if (bicycle[ar2] > 100)
-			//	{
-			//	 //1/2박
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + bicycle[ar2] -100+11), velocity);
-			//		Sleep(250);
-			//		ar2++;
-			//	}
-			//	else if (mountain_rabbit[ar2] == 100) 
-			//	{
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + bicycle[ar2] + 11), velocity);
-			//		Sleep(400);
-			//		ar2++;
-			//	}
-			//	else
-			//    {
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + bicycle[ar2] + 11), velocity);
-			//		Sleep(500);
-			//		ar2++;
-			//    }
-			//}
-			
-				//while (mountain_rabbit[ar2] != '\0')
-			//{
-			//	
-			//	if (mountain_rabbit[ar2]>100)
-			//	{
-			//		//1/2박
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + mountain_rabbit[ar2] + 11-100), velocity);
-			//		Sleep(300);
-			//		ar2++;
-			//	}
-			//	else if (mountain_rabbit[ar2] == 100) {
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + mountain_rabbit[ar2]), velocity);
-			//		Sleep(600);
-			//		ar2++;
-			//	}
-			//	else
-			//	{
-			//		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + mountain_rabbit[ar2] + 11), velocity);
-			//		Sleep(600);
-			//		ar2++;
-			//	}
-			//	
-			//	
-			//}
-		/*	while (small_star[ar2]!='\0')
-			{
-				midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + small_star[ar2] + 11), velocity);
-				Sleep(500);
-				ar2++;
-			}*/
 				
-			
-			
-			
 		}
 			
 		else

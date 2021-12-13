@@ -113,14 +113,14 @@ void music_note(HMIDIOUT h_midi_device, int *byte_note, BYTE byte_valo, int bmp)
 {
 	while (byte_note != '\0')
 	{
-		if (byte_note > 100 && byte_note < 200)
+		if (*byte_note > 100 && *byte_note < 200)
 		{
 			//1/8박
 			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 100 + 11), byte_valo);
 			Sleep(250);
 			byte_note++;
 		}
-		else if (byte_note == 100)
+		else if (*byte_note == 100)
 		{
 			//쉼표
 			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note), byte_valo);
@@ -128,14 +128,14 @@ void music_note(HMIDIOUT h_midi_device, int *byte_note, BYTE byte_valo, int bmp)
 			byte_note++;
 			
 		}
-		else if (byte_note > 200 && byte_note < 300)
+		else if (*byte_note > 200 && *byte_note < 300)
 		{
 			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 200 + 11), byte_valo);
 			Sleep(400);
 			byte_note++;
 		
 		}
-		else if (byte_note > 300 && byte_note < 400)
+		else if (*byte_note > 300 && *byte_note < 400)
 		{
 			//1/8.박
 			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 300 + 11), byte_valo);
@@ -143,7 +143,7 @@ void music_note(HMIDIOUT h_midi_device, int *byte_note, BYTE byte_valo, int bmp)
 			byte_note++;
 			
 		}
-		else if (byte_note > 400 && byte_note < 500)
+		else if (*byte_note > 400 && *byte_note < 500)
 		{
 			//1/16박
 			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 400 + 11), byte_valo);
@@ -151,7 +151,7 @@ void music_note(HMIDIOUT h_midi_device, int *byte_note, BYTE byte_valo, int bmp)
 			byte_note++;
 		
 		}
-		else if (byte_note > 500 && byte_note < 600)
+		else if (*byte_note > 500 && *byte_note < 600)
 		{
 			//1/16박
 			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 500 + 11), byte_valo);
@@ -159,11 +159,16 @@ void music_note(HMIDIOUT h_midi_device, int *byte_note, BYTE byte_valo, int bmp)
 			byte_note++;
 			
 		}
-		else
+		else if (*byte_note<100&&*byte_note>0)
 		{
 			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note + 11), byte_valo);
 			Sleep(500);
 			byte_note++;
+		}
+		else
+		{
+			int i = 0;
+			break;
 		
 		}
 	}
