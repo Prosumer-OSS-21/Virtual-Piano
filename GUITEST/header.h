@@ -6,7 +6,7 @@
 
 
 #pragma comment(lib, "winmm.lib")
-//#pragma comment(lib, "user32.lib")
+#pragma comment(lib, "user32.lib")
 
 #define NKEY 29
 #define NINSTRUMENT 128

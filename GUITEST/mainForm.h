@@ -748,7 +748,6 @@ namespace GUITEST {
 		}
 #pragma endregion
 	private: System::Void mainForm_Load(System::Object^ sender, System::EventArgs^ e) {
-		this->label1->Text = L"    Instrument : Test";
 		h_midi_device = midi_open(0);
 
 		if (h_midi_device == NULL) return;
@@ -764,39 +763,56 @@ namespace GUITEST {
 	}
 private: System::Void mainForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 	int local_volume = 0;
-	if (e->KeyCode == Keys(VK_OEM_PLUS))
+	int local_octave = 0;
+	if (e->KeyCode == Keys(0x68))
 	{
 		if (volume < (NVOLUME - 1)) volume += 1;
 		midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
-		//this->label3->Text = L"    Volume : "
+		local_volume = volume;
+		string string1 = to_string(local_volume);
+		String^ str2 = gcnew String(string1.c_str());
+		this->label3->Text = "    Volume : " + str2;
 	}
-	else if (e->KeyCode == Keys(VK_OEM_MINUS))
+	else if (e->KeyCode == Keys(0x67))
 	{
 		if (volume != 0) volume -= 1;
 		midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
-		//this->label3->Text = L"    Volume : " + volume;
+		local_volume = volume;
+		string string1 = to_string(local_volume);
+		String^ str2 = gcnew String(string1.c_str());
+		this->label3->Text = "    Volume : " + str2;
 	}
-	else if (e->KeyCode == Keys(VK_RIGHT))
+	else if (e->KeyCode == Keys(0x62))
 	{
 		if (instrument < (NINSTRUMENT - 1)) instrument += 1;
-		midi_send_short_msg(h_midi_device, 0xC0, instrument, 0); // 0xC0: program change
-		//this->label1->Text = "    Instrument : " + instname;
+		midi_send_short_msg(h_midi_device, 0xC0, instrument, 0);
+		string string1 = string(inst_name[instrument]);
+		String^ str2 = gcnew String(string1.c_str());
+		this->label1->Text = L"    Instrument : " + str2;
 	}
-	else if (e->KeyCode == Keys(VK_LEFT))
+	else if (e->KeyCode == Keys(0x61))
 	{
 		if (instrument != 0) instrument -= 1;
-		midi_send_short_msg(h_midi_device, 0xC0, instrument, 0); // 0xC0: program change
-		//printf("Instrument : %-24s", inst_name[instrument]);
+		midi_send_short_msg(h_midi_device, 0xC0, instrument, 0);
+		string string1 = string(inst_name[instrument]);
+		String^ str2 = gcnew String(string1.c_str());
+		this->label1->Text = L"    Instrument : " + str2;
 	}
-	else if (e->KeyCode == Keys(VK_UP))
+	else if (e->KeyCode == Keys(0x65))
 	{
 		if (octave < (NNOTE - NKEY)) octave += 12;
-		//printf("Octave : %03d", octave);
+		local_octave = octave;
+		string string1 = to_string(local_octave);
+		String^ str2 = gcnew String(string1.c_str());
+		this->label2->Text = L"    Octave : " + str2;
 	}
-	else if (e->KeyCode == Keys(VK_DOWN))
+	else if (e->KeyCode == Keys(0x64))
 	{
 		if (octave != 0) octave -= 12;
-		//printf("Octave : %03d", octave);
+		local_octave = octave;
+		string string1 = to_string(local_octave);
+		String^ str2 = gcnew String(string1.c_str());
+		this->label2->Text = L"    Octave : " + str2;
 	}
 	else {
 		for (key = 0; key < NKEY; key++) {
@@ -806,11 +822,6 @@ private: System::Void mainForm_KeyDown(System::Object^ sender, System::Windows::
 
 					piano_key_on_off[key] = 1;
 					midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + key), velocity);
-					volume += 1;
-					local_volume = volume;
-					string string1 = to_string(local_volume);
-					String^ str2 = gcnew String(string1.c_str());
-					this->label3->Text = str2;
 				}
 		}
 	}

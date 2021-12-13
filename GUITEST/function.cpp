@@ -10,10 +10,12 @@ void midi_output_error(MMRESULT mm_result)
 {
 	char sz_err_msg[128];
 	wchar_t w_sz_err_msg[128];
-
+	char err_msg_text_t[] = "Midi Error!!!";
+	wchar_t err_msg_text_w[20];
 	mbstowcs(w_sz_err_msg, sz_err_msg, strlen(sz_err_msg) + 1);
+	mbstowcs(err_msg_text_w, err_msg_text_t, strlen(err_msg_text_t) + 1);
 	LPWSTR err_msg = w_sz_err_msg;
-	LPWSTR err_msg_text = L"Midi Error!!!";
+	LPWSTR err_msg_text = err_msg_text_w;
 	midiInGetErrorText(mm_result, err_msg, sizeof(sz_err_msg));
 	MessageBox(0, err_msg, err_msg_text, MB_OK);
 }
