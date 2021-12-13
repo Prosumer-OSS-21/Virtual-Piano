@@ -185,9 +185,9 @@ int main()
 
 			Sleep(2000);	
 			int note1[1000];
-			while (note[telling][ar2] != '\0')
+			while (note[telling-1][ar2] != '\0')
 			{
-				note1[ar2] = note[telling][ar2];
+				note1[ar2] = note[telling-1][ar2];
 				ar2++;
 			}
 			ar2 = 0;
