@@ -1,5 +1,4 @@
 #pragma once
-//#include "main.cpp"
 #include "header.h"
 
 BYTE key = 0;
@@ -212,6 +211,7 @@ namespace GUITEST {
 			this->button3->Text = L"X";
 			this->button3->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button3->UseVisualStyleBackColor = false;
+			this->button3->Click += gcnew System::EventHandler(this, &mainForm::button3_Click);
 			// 
 			// button4
 			// 
@@ -229,6 +229,7 @@ namespace GUITEST {
 			this->button4->Text = L"V";
 			this->button4->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button4->UseVisualStyleBackColor = false;
+			this->button4->Click += gcnew System::EventHandler(this, &mainForm::button4_Click);
 			// 
 			// button5
 			// 
@@ -246,6 +247,7 @@ namespace GUITEST {
 			this->button5->Text = L"C";
 			this->button5->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button5->UseVisualStyleBackColor = false;
+			this->button5->Click += gcnew System::EventHandler(this, &mainForm::button5_Click);
 			// 
 			// button6
 			// 
@@ -263,6 +265,7 @@ namespace GUITEST {
 			this->button6->Text = L"M";
 			this->button6->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button6->UseVisualStyleBackColor = false;
+			this->button6->Click += gcnew System::EventHandler(this, &mainForm::button6_Click);
 			// 
 			// button7
 			// 
@@ -280,6 +283,7 @@ namespace GUITEST {
 			this->button7->Text = L"N";
 			this->button7->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button7->UseVisualStyleBackColor = false;
+			this->button7->Click += gcnew System::EventHandler(this, &mainForm::button7_Click);
 			// 
 			// button8
 			// 
@@ -297,6 +301,7 @@ namespace GUITEST {
 			this->button8->Text = L"B";
 			this->button8->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button8->UseVisualStyleBackColor = false;
+			this->button8->Click += gcnew System::EventHandler(this, &mainForm::button8_Click);
 			// 
 			// button9
 			// 
@@ -313,6 +318,7 @@ namespace GUITEST {
 			this->button9->Text = L"S";
 			this->button9->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button9->UseVisualStyleBackColor = false;
+			this->button9->Click += gcnew System::EventHandler(this, &mainForm::button9_Click);
 			// 
 			// button10
 			// 
@@ -329,6 +335,7 @@ namespace GUITEST {
 			this->button10->Text = L"D";
 			this->button10->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button10->UseVisualStyleBackColor = false;
+			this->button10->Click += gcnew System::EventHandler(this, &mainForm::button10_Click);
 			// 
 			// button11
 			// 
@@ -345,6 +352,7 @@ namespace GUITEST {
 			this->button11->Text = L"G";
 			this->button11->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button11->UseVisualStyleBackColor = false;
+			this->button11->Click += gcnew System::EventHandler(this, &mainForm::button11_Click);
 			// 
 			// button12
 			// 
@@ -361,6 +369,7 @@ namespace GUITEST {
 			this->button12->Text = L"H";
 			this->button12->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button12->UseVisualStyleBackColor = false;
+			this->button12->Click += gcnew System::EventHandler(this, &mainForm::button12_Click);
 			// 
 			// button13
 			// 
@@ -377,6 +386,7 @@ namespace GUITEST {
 			this->button13->Text = L"J";
 			this->button13->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button13->UseVisualStyleBackColor = false;
+			this->button13->Click += gcnew System::EventHandler(this, &mainForm::button13_Click);
 			// 
 			// button14
 			// 
@@ -393,6 +403,7 @@ namespace GUITEST {
 			this->button14->Text = L"7";
 			this->button14->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button14->UseVisualStyleBackColor = false;
+			this->button14->Click += gcnew System::EventHandler(this, &mainForm::button14_Click);
 			// 
 			// button15
 			// 
@@ -409,6 +420,7 @@ namespace GUITEST {
 			this->button15->Text = L"6";
 			this->button15->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button15->UseVisualStyleBackColor = false;
+			this->button15->Click += gcnew System::EventHandler(this, &mainForm::button15_Click);
 			// 
 			// button16
 			// 
@@ -425,6 +437,7 @@ namespace GUITEST {
 			this->button16->Text = L"5";
 			this->button16->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button16->UseVisualStyleBackColor = false;
+			this->button16->Click += gcnew System::EventHandler(this, &mainForm::button16_Click);
 			// 
 			// button17
 			// 
@@ -441,6 +454,7 @@ namespace GUITEST {
 			this->button17->Text = L"3";
 			this->button17->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button17->UseVisualStyleBackColor = false;
+			this->button17->Click += gcnew System::EventHandler(this, &mainForm::button17_Click);
 			// 
 			// button18
 			// 
@@ -457,6 +471,7 @@ namespace GUITEST {
 			this->button18->Text = L"2";
 			this->button18->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button18->UseVisualStyleBackColor = false;
+			this->button18->Click += gcnew System::EventHandler(this, &mainForm::button18_Click);
 			// 
 			// button19
 			// 
@@ -474,6 +489,7 @@ namespace GUITEST {
 			this->button19->Text = L"U";
 			this->button19->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button19->UseVisualStyleBackColor = false;
+			this->button19->Click += gcnew System::EventHandler(this, &mainForm::button19_Click);
 			// 
 			// button20
 			// 
@@ -491,6 +507,7 @@ namespace GUITEST {
 			this->button20->Text = L"Y";
 			this->button20->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button20->UseVisualStyleBackColor = false;
+			this->button20->Click += gcnew System::EventHandler(this, &mainForm::button20_Click);
 			// 
 			// button21
 			// 
@@ -508,6 +525,7 @@ namespace GUITEST {
 			this->button21->Text = L"T";
 			this->button21->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button21->UseVisualStyleBackColor = false;
+			this->button21->Click += gcnew System::EventHandler(this, &mainForm::button21_Click);
 			// 
 			// button22
 			// 
@@ -525,6 +543,7 @@ namespace GUITEST {
 			this->button22->Text = L"R";
 			this->button22->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button22->UseVisualStyleBackColor = false;
+			this->button22->Click += gcnew System::EventHandler(this, &mainForm::button22_Click);
 			// 
 			// button23
 			// 
@@ -542,6 +561,7 @@ namespace GUITEST {
 			this->button23->Text = L"E";
 			this->button23->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button23->UseVisualStyleBackColor = false;
+			this->button23->Click += gcnew System::EventHandler(this, &mainForm::button23_Click);
 			// 
 			// button24
 			// 
@@ -559,6 +579,7 @@ namespace GUITEST {
 			this->button24->Text = L"W";
 			this->button24->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button24->UseVisualStyleBackColor = false;
+			this->button24->Click += gcnew System::EventHandler(this, &mainForm::button24_Click);
 			// 
 			// button25
 			// 
@@ -576,6 +597,7 @@ namespace GUITEST {
 			this->button25->Text = L"Q";
 			this->button25->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button25->UseVisualStyleBackColor = false;
+			this->button25->Click += gcnew System::EventHandler(this, &mainForm::button25_Click);
 			// 
 			// button26
 			// 
@@ -592,6 +614,7 @@ namespace GUITEST {
 			this->button26->Text = L"0";
 			this->button26->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button26->UseVisualStyleBackColor = false;
+			this->button26->Click += gcnew System::EventHandler(this, &mainForm::button26_Click);
 			// 
 			// button27
 			// 
@@ -608,6 +631,7 @@ namespace GUITEST {
 			this->button27->Text = L"9";
 			this->button27->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button27->UseVisualStyleBackColor = false;
+			this->button27->Click += gcnew System::EventHandler(this, &mainForm::button27_Click);
 			// 
 			// button28
 			// 
@@ -625,6 +649,7 @@ namespace GUITEST {
 			this->button28->Text = L"P";
 			this->button28->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button28->UseVisualStyleBackColor = false;
+			this->button28->Click += gcnew System::EventHandler(this, &mainForm::button28_Click);
 			// 
 			// button29
 			// 
@@ -642,6 +667,7 @@ namespace GUITEST {
 			this->button29->Text = L"O";
 			this->button29->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button29->UseVisualStyleBackColor = false;
+			this->button29->Click += gcnew System::EventHandler(this, &mainForm::button29_Click);
 			// 
 			// button30
 			// 
@@ -659,6 +685,7 @@ namespace GUITEST {
 			this->button30->Text = L"I";
 			this->button30->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->button30->UseVisualStyleBackColor = false;
+			this->button30->Click += gcnew System::EventHandler(this, &mainForm::button30_Click);
 			// 
 			// label1
 			// 
@@ -734,11 +761,12 @@ namespace GUITEST {
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
+			this->Cursor = System::Windows::Forms::Cursors::Arrow;
 			this->HelpButton = true;
 			this->KeyPreview = true;
 			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"mainForm";
-			this->Text = L"Piano";
+			this->Text = L"Virtual Piano";
 			this->Load += gcnew System::EventHandler(this, &mainForm::mainForm_Load);
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &mainForm::mainForm_KeyDown);
 			this->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &mainForm::mainForm_KeyUp);
@@ -757,85 +785,228 @@ namespace GUITEST {
 		midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		piano_key_on_off[key] = 1;
-		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + key), velocity);
-		piano_key_on_off[key] = 0;
+		piano_key_on_off[0] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 0), velocity);
+		piano_key_on_off[0] = 0;
 	}
-private: System::Void mainForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
-	int local_volume = 0;
-	int local_octave = 0;
-	if (e->KeyCode == Keys(0x68))
-	{
-		if (volume < (NVOLUME - 1)) volume += 1;
-		midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
-		local_volume = volume;
-		string string1 = to_string(local_volume);
-		String^ str2 = gcnew String(string1.c_str());
-		this->label3->Text = "    Volume : " + str2;
-	}
-	else if (e->KeyCode == Keys(0x67))
-	{
-		if (volume != 0) volume -= 1;
-		midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
-		local_volume = volume;
-		string string1 = to_string(local_volume);
-		String^ str2 = gcnew String(string1.c_str());
-		this->label3->Text = "    Volume : " + str2;
-	}
-	else if (e->KeyCode == Keys(0x62))
-	{
-		if (instrument < (NINSTRUMENT - 1)) instrument += 1;
-		midi_send_short_msg(h_midi_device, 0xC0, instrument, 0);
-		string string1 = string(inst_name[instrument]);
-		String^ str2 = gcnew String(string1.c_str());
-		this->label1->Text = L"    Instrument : " + str2;
-	}
-	else if (e->KeyCode == Keys(0x61))
-	{
-		if (instrument != 0) instrument -= 1;
-		midi_send_short_msg(h_midi_device, 0xC0, instrument, 0);
-		string string1 = string(inst_name[instrument]);
-		String^ str2 = gcnew String(string1.c_str());
-		this->label1->Text = L"    Instrument : " + str2;
-	}
-	else if (e->KeyCode == Keys(0x65))
-	{
-		if (octave < (NNOTE - NKEY)) octave += 12;
-		local_octave = octave;
-		string string1 = to_string(local_octave);
-		String^ str2 = gcnew String(string1.c_str());
-		this->label2->Text = L"    Octave : " + str2;
-	}
-	else if (e->KeyCode == Keys(0x64))
-	{
-		if (octave != 0) octave -= 12;
-		local_octave = octave;
-		string string1 = to_string(local_octave);
-		String^ str2 = gcnew String(string1.c_str());
-		this->label2->Text = L"    Octave : " + str2;
-	}
-	else {
-		for (key = 0; key < NKEY; key++) {
-			if (e->KeyCode == Keys(piano_key[key]))
-				if (piano_key_on_off[key] == 0)
-				{
-
-					piano_key_on_off[key] = 1;
-					midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + key), velocity);
-				}
+	private: System::Void mainForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+		int local_volume = 0;
+		int local_octave = 0;
+		if (e->KeyCode == Keys(0x68))
+		{
+			if (volume < (NVOLUME - 1)) volume += 1;
+			midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
+			local_volume = volume;
+			string string1 = to_string(local_volume);
+			String^ str2 = gcnew String(string1.c_str());
+			this->label3->Text = "    Volume : " + str2;
 		}
-	}
-}
-private: System::Void mainForm_KeyUp(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
-	for (key = 0; key < NKEY; key++) {
-		if (e->KeyCode == Keys(piano_key[key])) {
-			if (piano_key_on_off[key] != 0)
-			{
-				piano_key_on_off[key] = 0;
-				midi_send_short_msg(h_midi_device, 0x80, (BYTE)(octave + key), velocity);
+		else if (e->KeyCode == Keys(0x67))
+		{
+			if (volume != 0) volume -= 1;
+			midi_send_short_msg(h_midi_device, 0xB0, 7, volume);
+			local_volume = volume;
+			string string1 = to_string(local_volume);
+			String^ str2 = gcnew String(string1.c_str());
+			this->label3->Text = "    Volume : " + str2;
+		}
+		else if (e->KeyCode == Keys(0x66)) {
+			midi_all_channel_sound_off(h_midi_device);
+		}
+		else if (e->KeyCode == Keys(0x62))
+		{
+			if (instrument < (NINSTRUMENT - 1)) instrument += 1;
+			midi_send_short_msg(h_midi_device, 0xC0, instrument, 0);
+			string string1 = string(inst_name[instrument]);
+			String^ str2 = gcnew String(string1.c_str());
+			this->label1->Text = L"    Instrument : " + str2;
+		}
+		else if (e->KeyCode == Keys(0x61))
+		{
+			if (instrument != 0) instrument -= 1;
+			midi_send_short_msg(h_midi_device, 0xC0, instrument, 0);
+			string string1 = string(inst_name[instrument]);
+			String^ str2 = gcnew String(string1.c_str());
+			this->label1->Text = L"    Instrument : " + str2;
+		}
+		else if (e->KeyCode == Keys(0x65))
+		{
+			if (octave < (NNOTE - NKEY)) octave += 12;
+			local_octave = octave;
+			string string1 = to_string(local_octave);
+			String^ str2 = gcnew String(string1.c_str());
+			this->label2->Text = L"    Octave : " + str2;
+		}
+		else if (e->KeyCode == Keys(0x64))
+		{
+			if (octave != 0) octave -= 12;
+			local_octave = octave;
+			string string1 = to_string(local_octave);
+			String^ str2 = gcnew String(string1.c_str());
+			this->label2->Text = L"    Octave : " + str2;
+		}
+		else {
+			for (key = 0; key < NKEY; key++) {
+				if (e->KeyCode == Keys(piano_key[key]))
+					if (piano_key_on_off[key] == 0)
+					{
+
+						piano_key_on_off[key] = 1;
+						midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + key), velocity);
+					}
 			}
 		}
 	}
+	private: System::Void mainForm_KeyUp(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+		for (key = 0; key < NKEY; key++) {
+			if (e->KeyCode == Keys(piano_key[key])) {
+				if (piano_key_on_off[key] != 0)
+				{
+					piano_key_on_off[key] = 0;
+					midi_send_short_msg(h_midi_device, 0x80, (BYTE)(octave + key), velocity);
+				}
+			}
+		}
+	}
+	private: System::Void button9_Click(System::Object^ sender, System::EventArgs^ e) {
+		piano_key_on_off[1] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 1), velocity);
+		piano_key_on_off[1] = 0;
+	}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[2] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 2), velocity);
+	piano_key_on_off[2] = 0;
+}
+private: System::Void button10_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[3] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 3), velocity);
+	piano_key_on_off[3] = 0;
+}
+private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[4] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 4), velocity);
+	piano_key_on_off[4] = 0;
+}
+private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[5] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 5), velocity);
+	piano_key_on_off[5] = 0;
+}
+private: System::Void button11_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[6] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 6), velocity);
+	piano_key_on_off[6] = 0;
+}
+private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[7] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 7), velocity);
+	piano_key_on_off[7] = 0;
+}
+private: System::Void button12_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[8] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 8), velocity);
+	piano_key_on_off[8] = 0;
+}
+private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[9] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 9), velocity);
+	piano_key_on_off[9] = 0;
+}
+private: System::Void button13_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[10] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 10), velocity);
+	piano_key_on_off[10] = 0;
+}
+private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[11] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 11), velocity);
+	piano_key_on_off[11] = 0;
+}
+private: System::Void button25_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[12] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 12), velocity);
+	piano_key_on_off[12] = 0;
+}
+private: System::Void button18_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[13] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 13), velocity);
+	piano_key_on_off[13] = 0;
+}
+private: System::Void button24_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[14] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 14), velocity);
+	piano_key_on_off[14] = 0;
+}
+private: System::Void button17_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[15] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 15), velocity);
+	piano_key_on_off[15] = 0;
+}
+private: System::Void button23_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[16] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 16), velocity);
+	piano_key_on_off[16] = 0;
+}
+private: System::Void button22_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[17] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 17), velocity);
+	piano_key_on_off[17] = 0;
+}
+private: System::Void button16_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[18] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 18), velocity);
+	piano_key_on_off[18] = 0;
+}
+private: System::Void button21_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[19] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 19), velocity);
+	piano_key_on_off[19] = 0;
+}
+private: System::Void button15_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[20] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 20), velocity);
+	piano_key_on_off[20] = 0;
+}
+private: System::Void button20_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[21] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 21), velocity);
+	piano_key_on_off[21] = 0;
+}
+private: System::Void button14_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[22] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 22), velocity);
+	piano_key_on_off[22] = 0;
+}
+private: System::Void button19_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[23] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 23), velocity);
+	piano_key_on_off[23] = 0;
+}
+private: System::Void button30_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[24] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 24), velocity);
+	piano_key_on_off[24] = 0;
+}
+private: System::Void button27_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[25] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 25), velocity);
+	piano_key_on_off[25] = 0;
+}
+private: System::Void button29_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[26] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 26), velocity);
+	piano_key_on_off[26] = 0;
+}
+private: System::Void button26_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[27] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 27), velocity);
+	piano_key_on_off[27] = 0;
+}
+private: System::Void button28_Click(System::Object^ sender, System::EventArgs^ e) {
+	piano_key_on_off[28] = 1;
+	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 28), velocity);
+	piano_key_on_off[28] = 0;
 }
 };
 }
