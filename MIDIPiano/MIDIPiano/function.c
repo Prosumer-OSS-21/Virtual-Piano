@@ -109,14 +109,14 @@ void gotoxy(int x, int y)
 	COORD pos = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
-void music_note(HMIDIOUT h_midi_device, int *byte_note, BYTE byte_valo, int bmp)
+void music_note(HMIDIOUT h_midi_device, int *byte_note, BYTE byte_valo, int octave)
 {
 	while (byte_note != '\0')
 	{
 		if (*byte_note > 100 && *byte_note < 200)
 		{
 			//1/8박
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 100 + 11), byte_valo);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note- 100 )+ (BYTE)(octave), byte_valo);
 			Sleep(250);
 			byte_note++;
 		}
@@ -130,7 +130,7 @@ void music_note(HMIDIOUT h_midi_device, int *byte_note, BYTE byte_valo, int bmp)
 		}
 		else if (*byte_note > 200 && *byte_note < 300)
 		{
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 200 + 11), byte_valo);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 200 )+(BYTE)(octave), byte_valo);
 			Sleep(400);
 			byte_note++;
 		
@@ -138,7 +138,7 @@ void music_note(HMIDIOUT h_midi_device, int *byte_note, BYTE byte_valo, int bmp)
 		else if (*byte_note > 300 && *byte_note < 400)
 		{
 			//1/8.박
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 300 + 11), byte_valo);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 300)+(BYTE)(octave), byte_valo);
 			Sleep(375);
 			byte_note++;
 			
@@ -146,7 +146,7 @@ void music_note(HMIDIOUT h_midi_device, int *byte_note, BYTE byte_valo, int bmp)
 		else if (*byte_note > 400 && *byte_note < 500)
 		{
 			//1/16박
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 400 + 11), byte_valo);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 400 )+(BYTE)(octave), byte_valo);
 			Sleep(125);
 			byte_note++;
 		
@@ -154,14 +154,14 @@ void music_note(HMIDIOUT h_midi_device, int *byte_note, BYTE byte_valo, int bmp)
 		else if (*byte_note > 500 && *byte_note < 600)
 		{
 			//1/16박
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 500 + 11), byte_valo);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note - 500 )+(BYTE)(octave), byte_valo);
 			Sleep(1000);
 			byte_note++;
 			
 		}
 		else if (*byte_note<100&&*byte_note>0)
 		{
-			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note + 11), byte_valo);
+			midi_send_short_msg(h_midi_device, 0x90, (BYTE)(0x30 + *byte_note ) +(BYTE)(octave), byte_valo);
 			Sleep(500);
 			byte_note++;
 		}

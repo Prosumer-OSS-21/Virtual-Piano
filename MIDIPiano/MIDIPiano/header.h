@@ -32,4 +32,4 @@ LRESULT midi_close(HMIDIOUT h_midi_device);
 void midi_send_short_msg(HMIDIOUT h_midi_device, BYTE byte_state, BYTE byte_note, BYTE byte_valo);
 void midi_all_channel_sound_off(HMIDIOUT h_midi_device);
 void gotoxy(int x, int y);
-void music_note(HMIDIOUT h_midi_device,int  *byte_note,BYTE byte_valo,int bmp);
+void music_note(HMIDIOUT h_midi_device,int  *byte_note,BYTE byte_valo,int octave);

@@ -189,11 +189,8 @@ int main()
 			{
 				note1[ar2] = note[telling-1][ar2];
 				ar2++;
-			}
-			ar2 = 0;
-				
-			
-			music_note(h_midi_device, note1, velocity, bpm);
+			}	
+			music_note(h_midi_device, note1, velocity, octave/12);
 				
 				
 
