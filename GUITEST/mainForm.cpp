@@ -7,6 +7,6 @@ using namespace System::Windows::Forms;
 void Main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	GUITEST::mainForm form;
+	VirtualPiano::mainForm form;
 	Application::Run(% form);
 }

@@ -54,7 +54,13 @@ char inst_name[][NINSTRUMENT] = {
 	"Telephone Ring", "Helicopter", "Applause", "Gunshot"
 };
 
-namespace GUITEST {
+int small_star[10000] = { 1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100,1008,8,6,6,5,5,3,100,8,8,6,6,5,5,3,100,100,1,1,8,8,10,10,8,100,6,6,5,5,3,3,1,100, '\0' };
+int school_bell[10000] = { 8,8,10,10,8,8,5,100,8,8,5,5,3,100,100,100,8,8,10,10,8,8,5,100,8,5,3,5,1,100,'\0' };
+int hare[1000] = { 8,105,105,108,105,1,100,3,105,103,101,105,8,100,100,101,108,101,108,101,108,5,100,  8, 103,106,105,103,1,100,'\0' };
+int bicycle[10000] = { 105 ,108, 8, 105,108,8 ,10,110,110,110,110,10 ,100,108,108,108,108 ,106,106,106,106, 105,105,105,105,5,100,105,108,108,108,105,108,8 ,110, 110 ,105,105,8,100,106,106,106,106, 105,105,105,105 ,103,103,108,108,1,'\0' };
+int airplane[10000] = { 305 ,403, 1, 3, 5 ,5 ,105 ,100,3, 3, 3 ,5, 5, 105 ,100,305,403,1,3,5,5,105,100,3,3,305,403,501,'\0' };
+
+namespace VirtualPiano {
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -124,6 +130,12 @@ namespace GUITEST {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::Label^ label6;
+	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::Label^ label8;
+	private: System::Windows::Forms::Label^ label9;
+
 
 
 	protected:
@@ -143,6 +155,7 @@ namespace GUITEST {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(mainForm::typeid));
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
@@ -175,6 +188,11 @@ namespace GUITEST {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// button2
@@ -722,7 +740,7 @@ namespace GUITEST {
 			this->label1->BackColor = System::Drawing::Color::White;
 			this->label1->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î ExtraBold", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label1->Location = System::Drawing::Point(14, 27);
+			this->label1->Location = System::Drawing::Point(14, 38);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(371, 27);
 			this->label1->TabIndex = 31;
@@ -734,7 +752,7 @@ namespace GUITEST {
 			this->label2->BackColor = System::Drawing::Color::White;
 			this->label2->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î ExtraBold", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label2->Location = System::Drawing::Point(658, 27);
+			this->label2->Location = System::Drawing::Point(658, 38);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(171, 27);
 			this->label2->TabIndex = 32;
@@ -746,11 +764,67 @@ namespace GUITEST {
 			this->label3->BackColor = System::Drawing::Color::White;
 			this->label3->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î ExtraBold", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label3->Location = System::Drawing::Point(885, 27);
+			this->label3->Location = System::Drawing::Point(885, 38);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(196, 27);
 			this->label3->TabIndex = 33;
 			this->label3->Text = L"    Volume : 127";
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(129)));
+			this->label5->ForeColor = System::Drawing::SystemColors::ControlText;
+			this->label5->Location = System::Drawing::Point(204, 9);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(124, 18);
+			this->label5->TabIndex = 35;
+			this->label5->Text = L"[F1] Little Star";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(129)));
+			this->label6->Location = System::Drawing::Point(360, 9);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(132, 18);
+			this->label6->TabIndex = 36;
+			this->label6->Text = L"[F2] School Bell";
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(129)));
+			this->label7->Location = System::Drawing::Point(519, 9);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(137, 18);
+			this->label7->TabIndex = 37;
+			this->label7->Text = L"[F3] Jack Rabbit";
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(129)));
+			this->label8->Location = System::Drawing::Point(687, 9);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(81, 18);
+			this->label8->TabIndex = 38;
+			this->label8->Text = L"[F4] Bike";
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Font = (gcnew System::Drawing::Font(L"³ª´®½ºÄù¾î Bold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(129)));
+			this->label9->Location = System::Drawing::Point(805, 9);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(174, 18);
+			this->label9->TabIndex = 39;
+			this->label9->Text = L"[F5] Plane In The Sky";
 			// 
 			// mainForm
 			// 
@@ -758,6 +832,11 @@ namespace GUITEST {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
 			this->ClientSize = System::Drawing::Size(1174, 382);
+			this->Controls->Add(this->label9);
+			this->Controls->Add(this->label8);
+			this->Controls->Add(this->label7);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
@@ -792,6 +871,7 @@ namespace GUITEST {
 			this->Controls->Add(this->button2);
 			this->Cursor = System::Windows::Forms::Cursors::Arrow;
 			this->HelpButton = true;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->KeyPreview = true;
 			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"mainForm";
@@ -848,6 +928,26 @@ namespace GUITEST {
 		}
 		else if (e->KeyCode == Keys(0x66)) {
 			midi_all_channel_sound_off(h_midi_device);
+		}
+		else if (e->KeyCode == Keys(0x70)) {
+			Sleep(500);
+			music_note(h_midi_device, small_star, velocity, octave / 12);
+		}
+		else if (e->KeyCode == Keys(0x71)) {
+			Sleep(500);
+			music_note(h_midi_device, school_bell, velocity, octave / 12);
+		}
+		else if (e->KeyCode == Keys(0x72)) {
+			Sleep(500);
+			music_note(h_midi_device, hare, velocity, octave / 12);
+		}
+		else if (e->KeyCode == Keys(0x73)) {
+			Sleep(500);
+			music_note(h_midi_device, bicycle, velocity, octave / 12);
+		}
+		else if (e->KeyCode == Keys(0x74)) {
+			Sleep(500);
+			music_note(h_midi_device, airplane, velocity, octave / 12);
 		}
 		else if (e->KeyCode == Keys(0x62))
 		{
@@ -908,117 +1008,117 @@ namespace GUITEST {
 		piano_key_on_off[1] = 1;
 		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 1), velocity);
 	}
-private: System::Void button3_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[2] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 2), velocity);
-}
-private: System::Void button10_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[3] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 3), velocity);
-}
-private: System::Void button5_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[4] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 4), velocity);
-}
-private: System::Void button4_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[5] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 5), velocity);
-}
-private: System::Void button11_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[6] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 6), velocity);
-}
-private: System::Void button8_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[7] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 7), velocity);
-}
-private: System::Void button12_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[8] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 8), velocity);
-}
-private: System::Void button7_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[9] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 9), velocity);
-}
-private: System::Void button13_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[10] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 10), velocity);
-}
-private: System::Void button6_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[11] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 11), velocity);
-}
-private: System::Void button25_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[12] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 12), velocity);
-}
-private: System::Void button18_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[13] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 13), velocity);
-}
-private: System::Void button24_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[14] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 14), velocity);
-}
-private: System::Void button17_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[15] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 15), velocity);
-}
-private: System::Void button23_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[16] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 16), velocity);
-}
-private: System::Void button22_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[17] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 17), velocity);
-}
-private: System::Void button16_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[18] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 18), velocity);
-}
-private: System::Void button21_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[19] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 19), velocity);
-}
-private: System::Void button15_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[20] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 20), velocity);
-}
-private: System::Void button20_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[21] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 21), velocity);
-}
-private: System::Void button14_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[22] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 22), velocity);
-}
-private: System::Void button19_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[23] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 23), velocity);
-}
-private: System::Void button30_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[24] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 24), velocity);
-}
-private: System::Void button27_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[25] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 25), velocity);
-}
-private: System::Void button29_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[26] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 26), velocity);
-}
-private: System::Void button26_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[27] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 27), velocity);
-}
-private: System::Void button28_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[28] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 28), velocity);
-}
-private: System::Void button2_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	piano_key_on_off[0] = 1;
-	midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 0), velocity);
-}
-};
+	private: System::Void button3_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[2] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 2), velocity);
+	}
+	private: System::Void button10_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[3] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 3), velocity);
+	}
+	private: System::Void button5_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[4] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 4), velocity);
+	}
+	private: System::Void button4_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[5] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 5), velocity);
+	}
+	private: System::Void button11_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[6] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 6), velocity);
+	}
+	private: System::Void button8_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[7] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 7), velocity);
+	}
+	private: System::Void button12_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[8] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 8), velocity);
+	}
+	private: System::Void button7_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[9] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 9), velocity);
+	}
+	private: System::Void button13_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[10] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 10), velocity);
+	}
+	private: System::Void button6_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[11] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 11), velocity);
+	}
+	private: System::Void button25_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[12] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 12), velocity);
+	}
+	private: System::Void button18_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[13] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 13), velocity);
+	}
+	private: System::Void button24_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[14] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 14), velocity);
+	}
+	private: System::Void button17_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[15] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 15), velocity);
+	}
+	private: System::Void button23_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[16] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 16), velocity);
+	}
+	private: System::Void button22_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[17] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 17), velocity);
+	}
+	private: System::Void button16_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[18] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 18), velocity);
+	}
+	private: System::Void button21_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[19] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 19), velocity);
+	}
+	private: System::Void button15_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[20] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 20), velocity);
+	}
+	private: System::Void button20_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[21] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 21), velocity);
+	}
+	private: System::Void button14_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[22] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 22), velocity);
+	}
+	private: System::Void button19_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[23] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 23), velocity);
+	}
+	private: System::Void button30_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[24] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 24), velocity);
+	}
+	private: System::Void button27_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[25] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 25), velocity);
+	}
+	private: System::Void button29_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[26] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 26), velocity);
+	}
+	private: System::Void button26_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[27] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 27), velocity);
+	}
+	private: System::Void button28_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[28] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 28), velocity);
+	}
+	private: System::Void button2_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		piano_key_on_off[0] = 1;
+		midi_send_short_msg(h_midi_device, 0x90, (BYTE)(octave + 0), velocity);
+	}
+	};
 }
